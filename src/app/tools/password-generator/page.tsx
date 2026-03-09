@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ToolHero from '@/components/ToolHero';
 import ToolContainer from '@/components/ToolContainer';
 import ResultBox from '@/components/ResultBox';
@@ -29,7 +29,7 @@ export default function PasswordGeneratorPage() {
     setPasswords(generated);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     generatePasswords();
   }, [length, useUppercase, useLowercase, useNumbers, useSymbols]);
 

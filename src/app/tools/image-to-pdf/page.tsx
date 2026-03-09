@@ -54,21 +54,25 @@ export default function ImageToPDFPage() {
         await new Promise<void>((resolve) => {
           reader.onload = (e) => {
             const imgData = e.target?.result as string;
-            const imgWidth = pageWidth - 10;
-            const imgHeight = (imgWidth * img.height) / img.width;
+            const imageElement = new Image();
+            imageElement.onload = () => {
+              const imgWidth = pageWidth - 10;
+              const imgHeight = (imgWidth * imageElement.height) / imageElement.width;
 
-            let y = 5;
-            if (imgHeight > pageHeight - 10) {
-              // Scale down if too tall
-              const scaledHeight = pageHeight - 10;
-              const scaledWidth = (scaledHeight * img.width) / img.height;
-              const x = (pageWidth - scaledWidth) / 2;
-              pdf.addImage(imgData, 'JPEG', x, y, scaledWidth, scaledHeight);
-            } else {
-              const x = (pageWidth - imgWidth) / 2;
-              pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
-            }
-            resolve();
+              const y = 5;
+              if (imgHeight > pageHeight - 10) {
+                // Scale down if too tall
+                const scaledHeight = pageHeight - 10;
+                const scaledWidth = (scaledHeight * imageElement.width) / imageElement.height;
+                const x = (pageWidth - scaledWidth) / 2;
+                pdf.addImage(imgData, 'JPEG', x, y, scaledWidth, scaledHeight);
+              } else {
+                const x = (pageWidth - imgWidth) / 2;
+                pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
+              }
+              resolve();
+            };
+            imageElement.src = imgData;
           };
           reader.readAsDataURL(img);
         });

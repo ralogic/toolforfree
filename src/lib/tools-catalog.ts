@@ -1,5 +1,24 @@
 // Tools catalog with metadata for navigation
-export const TOOLS_CATALOG = {
+export interface ToolItem {
+  id: number;
+  name: string;
+  slug: string;
+  icon: string;
+  description: string;
+  category: string;
+  keywords: string[];
+}
+
+interface ToolsCatalog {
+  textTools: ToolItem[];
+  developerTools: ToolItem[];
+  utilityTools: ToolItem[];
+  pdfTools: ToolItem[];
+  imageTools: ToolItem[];
+  allTools: ToolItem[];
+}
+
+export const TOOLS_CATALOG: ToolsCatalog = {
   textTools: [
     {
       id: 11,
@@ -272,6 +291,6 @@ export const searchTools = (query: string) => {
   return TOOLS_CATALOG.allTools.filter(tool =>
     tool.name.toLowerCase().includes(lowerQuery) ||
     tool.description.toLowerCase().includes(lowerQuery) ||
-    tool.keywords.some(keyword => keyword.includes(lowerQuery))
+    tool.keywords.some((keyword) => keyword.includes(lowerQuery))
   );
 };

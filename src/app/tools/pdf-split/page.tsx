@@ -74,7 +74,8 @@ export default function PDFSplitPage() {
       }
 
       const pdfBytes = await newPdf.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const safePdfBytes = new Uint8Array(pdfBytes);
+      const blob = new Blob([safePdfBytes], { type: 'application/pdf' });
       downloadFile(blob, 'extracted.pdf');
     } catch (err) {
       setError('Error extracting pages: ' + (err instanceof Error ? err.message : 'Unknown error'));

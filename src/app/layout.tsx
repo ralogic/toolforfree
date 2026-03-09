@@ -1,10 +1,21 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { ToastContainer } from '@/components/Toast';
+import FloatingShapes from '@/components/FloatingShapes';
+import GradientOrbs from '@/components/GradientOrbs';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const geistSans = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist-sans',
+});
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+});
 
 export const metadata: Metadata = {
   title: 'ToolForFree – Free Online PDF, Image & Developer Tools',
@@ -54,29 +65,40 @@ export default function RootLayout({
         />
         
         {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1194350296944754"
-          crossOrigin="anonymous"
-        />
+        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
         
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F54ZZ47D8R" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-F54ZZ47D8R');
-            `,
-          }}
-        />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+                `,
+              }}
+            />
+          </>
+        )}
       </head>
-      <body className={`${inter.className} bg-white text-slate-900 antialiased`}>
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-[var(--bg-page)] text-[var(--text-primary)] antialiased relative`}>
+        <FloatingShapes />
+        <GradientOrbs />
+        <div className="relative z-10">
+          <Navbar />
+          {children}
+          <Footer />
+          <ToastContainer />
+        </div>
       </body>
     </html>
   );

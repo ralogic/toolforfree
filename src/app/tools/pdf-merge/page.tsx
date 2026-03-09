@@ -41,11 +41,12 @@ export default function PDFMergePage() {
         const arrayBuffer = await file.arrayBuffer();
         const pdf = await PDFDocument.load(arrayBuffer);
         const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-        copiedPages.forEach(page => mergedPdf.addPage(page));
+        copiedPages.forEach((page: any) => mergedPdf.addPage(page));
       }
 
       const pdfBytes = await mergedPdf.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const safePdfBytes = new Uint8Array(pdfBytes);
+      const blob = new Blob([safePdfBytes], { type: 'application/pdf' });
       downloadFile(blob, 'merged.pdf');
       setError('');
     } catch (err) {

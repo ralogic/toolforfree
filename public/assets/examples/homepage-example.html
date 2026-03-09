@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolForFree - Free Online Tools for Developers and Creators</title>
+  <meta name="description" content="Discover trusted free tools for PDF, images, text, and developer tasks. Fast, private, and polished experience.">
+  <link rel="stylesheet" href="../css/design-system.css">
+</head>
+<body>
+  
+  <!-- ============================================
+       HEADER / NAVBAR
+       ============================================ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-container">
+      <!-- Left: Brand + Badge -->
+      <a href="/" class="navbar-brand">
+        <span>ToolForFree</span>
+        <span class="navbar-badge">Trusted Free Tools</span>
+      </a>
+      
+      <!-- Center: Navigation (Desktop) -->
+      <nav>
+        <ul class="navbar-nav">
+          <li><a href="/tools" class="nav-link active">Tools</a></li>
+          <li><a href="/tools?category=pdf" class="nav-link">Categories</a></li>
+          <li><a href="/about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+      
+      <!-- Right: Actions -->
+      <div class="navbar-actions">
+        <!-- Search Button -->
+        <button class="icon-btn" aria-label="Search tools" id="searchBtn">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        
+        <!-- Theme Toggle -->
+        <button class="icon-btn" aria-label="Toggle theme" id="themeToggle">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="sun-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        
+        <!-- Suggest Tool -->
+        <button class="btn btn-ghost btn-sm" style="display: none;">
+          Suggest a Tool
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero">
+    <div class="hero-container">
+      <!-- Left: Content -->
+      <div class="hero-content">
+        <span class="hero-badge">Trusted Free Tools</span>
+        
+        <h1 class="hero-title">
+          Free Online Tools for Developers and Creators
+        </h1>
+        
+        <p class="hero-subtitle">
+          ToolForFree helps you handle PDFs, images, text, and developer tasks with a clean, fast, and privacy-friendly experience.
+        </p>
+        
+        <!-- Hero Search -->
+        <div class="hero-search">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input 
+              type="search" 
+              class="input input-lg search-input" 
+              placeholder="Search by tool name, keyword, or category"
+              id="heroSearch"
+            />
+            <span class="search-kbd">⌘K</span>
+          </div>
+          
+          <!-- Popular chips -->
+          <div class="chips-group">
+            <span style="font-size: 0.875rem; color: var(--text-3); font-weight: 500;">Popular:</span>
+            <button class="chip">PDF Merger</button>
+            <button class="chip">Image Compressor</button>
+            <button class="chip">JSON Formatter</button>
+          </div>
+        </div>
+        
+        <!-- Hero Actions -->
+        <div class="hero-actions">
+          <a href="/tools" class="btn btn-primary btn-lg">
+            Browse All Tools
+          </a>
+          <a href="https://devprayog.tech" target="_blank" class="btn btn-ghost btn-lg">
+            Visit devprayog.tech
+          </a>
+        </div>
+      </div>
+      
+      <!-- Right: Search Results Panel -->
+      <div class="hero-panel">
+        <h3 class="hero-panel-title">Search Results</h3>
+        <div class="hero-panel-empty">
+          Start typing to find tools instantly.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       POPULAR TOOLS SECTION
+       ============================================ -->
+  <section class="section">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header">
+        <div>
+          <h3 class="section-title">Popular Tools</h3>
+          <p class="section-subtitle">Most used tools by our community</p>
+        </div>
+        <a href="/tools" class="section-action">
+          See all tools
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Tool Cards Grid -->
+      <div class="grid grid-cols-1 grid-cols-2-md grid-cols-3-lg">
+        
+        <!-- Card 1: PDF Merger -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              📄
+            </div>
+            <span class="card-tag card-tag-pdf">PDF Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">PDF Merge</h5>
+            <p class="card-desc">
+              Combine multiple PDF files into a single document with ease. No file size limits.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/tools/pdf-merge" class="card-link">
+              Open tool
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">
+                🔒 Private
+              </span>
+              <span class="card-badge">
+                ⚡ Fast
+              </span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Card 2: Image Compressor -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              🖼️
+            </div>
+            <span class="card-tag card-tag-image">Image Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Image Compressor</h5>
+            <p class="card-desc">
+              Reduce image file size without losing quality. Supports JPG, PNG, WebP formats.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/tools/image-compressor" class="card-link">
+              Open tool
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">
+                🔒 Private
+              </span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Card 3: JSON Formatter -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              { }
+            </div>
+            <span class="card-tag card-tag-developer">Developer Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">JSON Formatter</h5>
+            <p class="card-desc">
+              Format, validate, and beautify JSON data with syntax highlighting and error detection.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/tools/json-formatter" class="card-link">
+              Open tool
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">
+                ⚡ Fast
+              </span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Card 4: Word Counter -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              📝
+            </div>
+            <span class="card-tag card-tag-text">Text Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Word Counter</h5>
+            <p class="card-desc">
+              Count words, characters, sentences, and paragraphs. See reading time estimates.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/tools/word-counter" class="card-link">
+              Open tool
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">
+                ⚡ Fast
+              </span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Card 5: QR Code Generator -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              ⬛
+            </div>
+            <span class="card-tag card-tag-utility">Utility Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">QR Code Generator</h5>
+            <p class="card-desc">
+              Create custom QR codes for URLs, text, emails, and more. Download as PNG or SVG.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/tools/qr-code-generator" class="card-link">
+              Open tool
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">
+                🔒 Private
+              </span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Card 6: Base64 Encoder -->
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              🔤
+            </div>
+            <span class="card-tag card-tag-developer">Developer Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Base64 Encoder/Decoder</h5>
+            <p class="card-desc">
+              Encode and decode Base64 strings instantly. Supports text and file conversion.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/tools/base64-encoder-decoder" class="card-link">
+              Open tool
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">
+                🔒 Private
+              </span>
+              <span class="card-badge">
+                ⚡ Fast
+              </span>
+            </div>
+          </div>
+        </article>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CATEGORIES SECTION (Optional)
+       ============================================ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h3 class="section-title">Browse by Category</h3>
+          <p class="section-subtitle">Find the perfect tool for your needs</p>
+        </div>
+      </div>
+      
+      <div class="chips-group">
+        <button class="chip chip-active">All Tools</button>
+        <button class="chip">PDF Tools</button>
+        <button class="chip">Image Tools</button>
+        <button class="chip">Text Tools</button>
+        <button class="chip">Developer Tools</button>
+        <button class="chip">Utility Tools</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Footer Grid -->
+      <div class="footer-grid">
+        
+        <!-- Column 1: Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">ToolForFree</div>
+          <p class="footer-desc">
+            Free online tools for developers and creators. Fast, private, and polished experience. 
+            All processing happens in your browser.
+          </p>
+          <div class="footer-trust">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+            </svg>
+            Privacy-First
+          </div>
+        </div>
+        
+        <!-- Column 2: Tools Links -->
+        <div>
+          <h6 class="footer-section-title">Tools</h6>
+          <ul class="footer-links">
+            <li><a href="/tools" class="footer-link">All Tools</a></li>
+            <li><a href="/tools?category=pdf" class="footer-link">PDF Tools</a></li>
+            <li><a href="/tools?category=image" class="footer-link">Image Tools</a></li>
+            <li><a href="/tools?category=text" class="footer-link">Text Tools</a></li>
+            <li><a href="/tools?category=developer" class="footer-link">Developer Tools</a></li>
+          </ul>
+        </div>
+        
+        <!-- Column 3: Company Links -->
+        <div>
+          <h6 class="footer-section-title">Company</h6>
+          <ul class="footer-links">
+            <li><a href="/about" class="footer-link">About</a></li>
+            <li><a href="/contact" class="footer-link">Contact</a></li>
+            <li><a href="/privacy-policy" class="footer-link">Privacy Policy</a></li>
+            <li><a href="/terms" class="footer-link">Terms of Service</a></li>
+            <li><a href="https://github.com" target="_blank" class="footer-link">GitHub</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © 2026 ToolForFree. All rights reserved.
+        </p>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <a href="https://devprayog.tech" target="_blank" class="footer-link" style="font-size: 0.875rem;">
+            Built by devprayog.tech
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT (Theme Toggle + Scroll Effect)
+       ============================================ -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+    
+    // Navbar Scroll Effect
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+    
+    // Search keyboard shortcut (⌘K or Ctrl+K)
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        document.getElementById('heroSearch').focus();
+      }
+    });
+    
+    // Optional: Make cards clickable
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') return; // Let link handle it
+        const link = card.querySelector('.card-link');
+        if (link) {
+          window.location.href = link.href;
+        }
+      });
+    });
+    
+    // Popular chips functionality
+    document.querySelectorAll('.chips-group .chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        // Remove active from all
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+        // Add active to clicked
+        chip.classList.add('chip-active');
+      });
+    });
+  </script>
+
+</body>
+</html>

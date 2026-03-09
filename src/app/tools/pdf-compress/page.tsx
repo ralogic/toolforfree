@@ -42,7 +42,8 @@ export default function PDFCompressPage() {
 
       // Basic compression - flatten content and optimize
       const pdfBytes = await pdf.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const safePdfBytes = new Uint8Array(pdfBytes);
+      const blob = new Blob([safePdfBytes], { type: 'application/pdf' });
 
       downloadFile(blob, 'compressed.pdf');
       setError('');

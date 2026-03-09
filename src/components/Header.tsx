@@ -1,44 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    // Check localStorage for theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDark(true);
-      document.body.classList.add('dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    
-    if (newTheme) {
-      document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
-
   return (
-    <header>
-      <div className="navbar">
+    <header className="border-b border-slate-200 bg-white shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-900">
+      <div className="navbar container mx-auto flex items-center justify-between px-4 py-4">
         <div className="logo">
-          <Link href="/">ToolForFree</Link>
+          <Link href="/" className="text-2xl font-bold text-slate-900 transition-colors hover:text-blue-600 dark:text-slate-100 dark:hover:text-blue-400">
+            ToolForFree
+          </Link>
         </div>
-        <div className="nav-links">
-          <Link href="/r">Tools</Link>
-          <button className="theme-toggle" onClick={toggleTheme}>
-            <span id="theme-icon">{isDark ? '☀️' : '🌙'}</span>
-          </button>
+        <div className="nav-links flex items-center gap-4">
+          <Link href="/r" className="text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">
+            Tools
+          </Link>
+          <ThemeToggle />
         </div>
       </div>
     </header>

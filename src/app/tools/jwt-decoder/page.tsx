@@ -147,7 +147,7 @@ export default function JWTDecoderPage() {
         items={[
           {
             question: 'Is JWT decoding the same as validation?',
-            answer: 'No. Decoding just reads the content. Validation checks the signature to ensure the token is authentic and hasn\\'t been tampered with.'
+            answer: "No. Decoding just reads the content. Validation checks the signature to ensure the token is authentic and hasn't been tampered with."
           },
           {
             question: 'Can I see the signature?',

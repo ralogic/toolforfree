@@ -1,6 +1,140 @@
-# ToolForFree - Next.js Migration
+# 🛠️ ToolForFree - Professional Online Tools Platform
 
-This project is a Next.js migration of the ToolForFree PHP website.
+> A comprehensive, production-ready web application offering 25+ free online tools for PDF, image, text, and developer workflows. Built with **Next.js 16**, **React 19**, and **TypeScript 5** with modern security, performance, and UX best practices.
+
+[![Next.js](https://img.shields.io/badge/Next.js-16.1-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8)](https://tailwindcss.com/)
+
+---
+
+## ✨ Key Features
+
+### 🎨 User Experience (Phase 2 & 3)
+- 🌙 **Dark Mode** - System-aware theme toggle with localStorage persistence
+- ⭐ **Favorites System** - Bookmark frequently used tools
+- 📜 **Tool History** - Auto-tracks last 10 tools with relative timestamps
+- 🎯 **Drag & Drop** - Enhanced file upload with validation
+- ⌨️ **Keyboard Shortcuts** - ⌘K/Ctrl+K for instant search focus
+- 🍞 **Breadcrumb Navigation** - Auto-generated from URL paths
+- 🔔 **Toast Notifications** - Success, error, warning, and info messages
+- ↗️ **Progress Indicators** - 4 types for different loading states
+
+### 🔐 Security & Performance (Phase 1)
+- **🔒 Privacy First** - All processing happens in your browser
+- **⚡ Lightning Fast** - 75% smaller initial bundle (lazy loading)
+- **🛡️ Production Security** - Rate limiting, XSS protection, CSP headers
+- **📊 Analytics** - Comprehensive tracking without compromising privacy
+- **💾 Caching Strategy** - Smart caching for optimal performance
+
+---
+
+## 🛠️ Tool Categories
+
+### 📄 PDF Tools (5 tools)
+- PDF Merger, Splitter, Compressor, Converter, and more
+
+### 🖼️ Image Tools (5 tools)
+- Image Compressor, Resizer, Cropper, Converter, Background Remover
+
+### 📝 Text Tools (5 tools)
+- Word Counter, Case Converter, Text Sorter, Lorem Ipsum Generator, and more
+
+### 💻 Developer Tools (5 tools)
+- JSON Formatter, Base64 Encoder, JWT Decoder, Regex Tester, URL Encoder
+
+### 🔧 Utility Tools (5 tools)
+- QR Code Generator, Password Generator, UUID Generator, Timestamp Converter, Age Calculator
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 20+ and npm
+- Git
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/toolforfree.git
+cd toolforfree
+
+# Install dependencies
+npm install
+
+# Copy environment variables
+cp .env.local.example .env.local
+
+# Edit .env.local and add your credentials
+# NEXT_PUBLIC_GA_ID=your-google-analytics-id
+# NEXT_PUBLIC_ADSENSE_ID=your-adsense-id
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the application.
+
+---
+
+## 📦 Tech Stack
+
+### Core
+- **Next.js 16.1** - React framework with App Router
+- **React 19.2** - UI library
+- **TypeScript 5** - Type safety
+- **TailwindCSS 4** - Utility-first CSS
+
+### Libraries
+- **pdf-lib** - PDF manipulation
+- **pdfjs-dist** - PDF rendering
+- **jspdf** - PDF generation
+- **qrcode** - QR code generation
+- **react-image-crop** - Image cropping
+- **uuid** - UUID generation
+
+### Infrastructure
+- **Next.js API Routes** - Backend endpoints
+- **Rate Limiting Middleware** - API protection
+- **Security Headers** - XSS, clickjacking protection
+- **Analytics Integration** - Google Analytics 4
+
+---
+
+## 🔐 Security Features
+
+- ✅ **Security Headers** - X-Frame-Options, CSP, X-Content-Type-Options
+- ✅ **Rate Limiting** - 100 requests per minute per IP
+- ✅ **Input Validation** - Sanitization and validation utilities
+- ✅ **Environment Variables** - Sensitive data in .env.local
+- ✅ **XSS Protection** - HTML escaping and sanitization
+- ✅ **File Validation** - Size and type checking
+
+---
+
+## 📄 Documentation
+
+- **[IMPROVEMENTS.md](./IMPROVEMENTS.md)** - Complete audit findings and all phase summaries
+- **[PHASE2.md](./PHASE2.md)** - Phase 2: UX enhancements (breadcrumbs, toasts, search shortcuts)
+- **[PHASE3.md](./PHASE3.md)** - Phase 3: Advanced features (dark mode, favorites, history, lazy loading)
+- **[SETUP.md](./SETUP.md)** - Quick setup guide with troubleshooting
+- **[MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md)** - Migration guides and patterns
+- **[QUICKSTART.md](./QUICKSTART.md)** - Quick start reference
+
+---
+
+## 🔗 Links
+
+- **Website**: [toolforfree.in](https://toolforfree.in)
+- **Developer**: [devprayog.tech](https://devprayog.tech)
+
+---
+
+**Built with ❤️ using Next.js, React, and TypeScript**
 
 ## Getting Started
 

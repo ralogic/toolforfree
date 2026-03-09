@@ -174,19 +174,19 @@ export default function RegexTesterPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4 bg-gray-50 rounded border border-gray-200">
             <h4 className="font-semibold text-gray-900 mb-2">Email</h4>
-            <code className="text-xs text-gray-700 block break-all">[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}</code>
+            <code className="text-xs text-gray-700 block break-all">{'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}'}</code>
           </div>
           <div className="p-4 bg-gray-50 rounded border border-gray-200">
             <h4 className="font-semibold text-gray-900 mb-2">URL</h4>
-            <code className="text-xs text-gray-700 block break-all">https?://[^\\s]+</code>
+            <code className="text-xs text-gray-700 block break-all">{'https?://[^\\s]+'}</code>
           </div>
           <div className="p-4 bg-gray-50 rounded border border-gray-200">
             <h4 className="font-semibold text-gray-900 mb-2">Phone (US)</h4>
-            <code className="text-xs text-gray-700 block break-all">\\d{3}-\\d{3}-\\d{4}</code>
+            <code className="text-xs text-gray-700 block break-all">{'\\d{3}-\\d{3}-\\d{4}'}</code>
           </div>
           <div className="p-4 bg-gray-50 rounded border border-gray-200">
             <h4 className="font-semibold text-gray-900 mb-2">Hex Color</h4>
-            <code className="text-xs text-gray-700 block break-all">#([a-f0-9]{6}|[a-f0-9]{3})</code>
+            <code className="text-xs text-gray-700 block break-all">{'#([a-f0-9]{6}|[a-f0-9]{3})'}</code>
           </div>
         </div>
       </ToolContainer>

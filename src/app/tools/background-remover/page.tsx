@@ -38,7 +38,7 @@ export default function BackgroundRemoverPage() {
     }
 
     setLoading(true);
-    setError('To remove backgrounds, please use our API-based tool or external services like:");
+    setError('To remove backgrounds, please use our API-based tool or external services listed below.');
 
     // This would require an API like remove.bg, which requires a paid subscription
     // For now, we show a guide for users

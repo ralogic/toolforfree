@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolForFree Design System - Visual Specification</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <style>
+    body {
+      padding: var(--sp-12) var(--sp-6);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .spec-section {
+      margin-bottom: var(--sp-20);
+    }
+    
+    .spec-title {
+      margin-bottom: var(--sp-6);
+      padding-bottom: var(--sp-4);
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--sp-4);
+    }
+    
+    .color-swatch {
+      display: flex;
+      flex-direction: column;
+      border: var(--border-w) solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    
+    .color-preview {
+      height: 80px;
+      width: 100%;
+    }
+    
+    .color-info {
+      padding: var(--sp-3);
+      background: var(--surface);
+    }
+    
+    .color-name {
+      font-size: var(--text-small-size);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    
+    .color-value {
+      font-size: var(--text-caption-size);
+      font-family: var(--font-mono);
+      color: var(--text-3);
+    }
+    
+    .typography-specimen {
+      margin-bottom: var(--sp-6);
+      padding: var(--sp-5);
+      background: var(--surface);
+      border: var(--border-w) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    
+    .specimen-label {
+      font-size: var(--text-caption-size);
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--sp-2);
+    }
+    
+    .spacing-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      margin: var(--sp-2);
+      padding: var(--sp-3);
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+    }
+    
+    .spacing-box {
+      background: var(--primary-500);
+      border-radius: 4px;
+    }
+    
+    .spacing-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-small-size);
+      font-weight: 600;
+      color: var(--text-2);
+    }
+    
+    .component-showcase {
+      padding: var(--sp-6);
+      background: var(--surface);
+      border: var(--border-w) solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--sp-6);
+    }
+    
+    .showcase-title {
+      font-size: var(--text-h6-size);
+      font-weight: 600;
+      margin-bottom: var(--sp-4);
+      color: var(--text);
+    }
+    
+    .theme-toggle-demo {
+      position: fixed;
+      top: var(--sp-6);
+      right: var(--sp-6);
+      z-index: 1000;
+    }
+    
+    .radius-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      margin: var(--sp-3);
+      background: var(--grad-primary);
+      color: white;
+      font-weight: 600;
+      font-size: var(--text-small-size);
+    }
+    
+    .shadow-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      margin: var(--sp-4);
+      background: var(--surface);
+      border: var(--border-w) solid var(--border);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: var(--text-small-size);
+    }
+    
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      padding: 2px 6px;
+      background: var(--surface-2);
+      border-radius: 4px;
+      color: var(--primary-600);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle-demo">
+    <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    </button>
+  </div>
+
+  <header style="margin-bottom: var(--sp-16);">
+    <h1>ToolForFree Design System</h1>
+    <p class="body-lg" style="color: var(--text-2); margin-top: var(--sp-3);">
+      Complete visual specification for the ToolForFree design system. 
+      Toggle theme to see dark mode variations.
+    </p>
+  </header>
+
+  <!-- COLORS -->
+  <section class="spec-section">
+    <h2 class="spec-title">Color Palette</h2>
+    
+    <h3 style="margin-top: var(--sp-8); margin-bottom: var(--sp-4);">Brand Colors</h3>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #2563EB;"></div>
+        <div class="color-info">
+          <div class="color-name">Primary 500</div>
+          <div class="color-value">#2563EB</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #1D4ED8;"></div>
+        <div class="color-info">
+          <div class="color-name">Primary 600</div>
+          <div class="color-value">#1D4ED8</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #1E40AF;"></div>
+        <div class="color-info">
+          <div class="color-name">Primary 700</div>
+          <div class="color-value">#1E40AF</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #7C3AED;"></div>
+        <div class="color-info">
+          <div class="color-name">Accent 500</div>
+          <div class="color-value">#7C3AED</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #14B8A6;"></div>
+        <div class="color-info">
+          <div class="color-name">Teal 500</div>
+          <div class="color-value">#14B8A6</div>
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="margin-top: var(--sp-8); margin-bottom: var(--sp-4);">Semantic Colors</h3>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #16A34A;"></div>
+        <div class="color-info">
+          <div class="color-name">Success</div>
+          <div class="color-value">#16A34A</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #F59E0B;"></div>
+        <div class="color-info">
+          <div class="color-name">Warning</div>
+          <div class="color-value">#F59E0B</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #EF4444;"></div>
+        <div class="color-info">
+          <div class="color-name">Danger</div>
+          <div class="color-value">#EF4444</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #0EA5E9;"></div>
+        <div class="color-info">
+          <div class="color-name">Info</div>
+          <div class="color-value">#0EA5E9</div>
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="margin-top: var(--sp-8); margin-bottom: var(--sp-4);">Neutrals (Light Theme)</h3>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #FFFFFF;"></div>
+        <div class="color-info">
+          <div class="color-name">N-0</div>
+          <div class="color-value">#FFFFFF</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #FCFCFD;"></div>
+        <div class="color-info">
+          <div class="color-name">N-25</div>
+          <div class="color-value">#FCFCFD</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #F8FAFC;"></div>
+        <div class="color-info">
+          <div class="color-name">N-50</div>
+          <div class="color-value">#F8FAFC</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #E2E8F0;"></div>
+        <div class="color-info">
+          <div class="color-name">N-200</div>
+          <div class="color-value">#E2E8F0</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #94A3B8;"></div>
+        <div class="color-info">
+          <div class="color-name">N-400</div>
+          <div class="color-value">#94A3B8</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #64748B;"></div>
+        <div class="color-info">
+          <div class="color-name">N-500</div>
+          <div class="color-value">#64748B</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #334155;"></div>
+        <div class="color-info">
+          <div class="color-name">N-700</div>
+          <div class="color-value">#334155</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: #0F172A;"></div>
+        <div class="color-info">
+          <div class="color-name">N-900</div>
+          <div class="color-value">#0F172A</div>
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="margin-top: var(--sp-8); margin-bottom: var(--sp-4);">Surface Tokens (Auto-switching)</h3>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-preview" style="background: var(--bg);"></div>
+        <div class="color-info">
+          <div class="color-name">Background</div>
+          <div class="color-value">--bg</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: var(--surface);"></div>
+        <div class="color-info">
+          <div class="color-name">Surface</div>
+          <div class="color-value">--surface</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: var(--surface-2);"></div>
+        <div class="color-info">
+          <div class="color-name">Surface-2</div>
+          <div class="color-value">--surface-2</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: var(--text); border: 1px solid var(--border);"></div>
+        <div class="color-info">
+          <div class="color-name">Text</div>
+          <div class="color-value">--text</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: var(--text-2);"></div>
+        <div class="color-info">
+          <div class="color-name">Text-2</div>
+          <div class="color-value">--text-2</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-preview" style="background: var(--text-3);"></div>
+        <div class="color-info">
+          <div class="color-name">Text-3</div>
+          <div class="color-value">--text-3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="spec-section">
+    <h2 class="spec-title">Typography</h2>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">H1 - 3.25rem / 700 / -0.02em</div>
+      <h1>The quick brown fox jumps over the lazy dog</h1>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">H2 - 2.25rem / 700 / -0.015em</div>
+      <h2>The quick brown fox jumps over the lazy dog</h2>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">H3 - 1.75rem / 650 / -0.01em</div>
+      <h3>The quick brown fox jumps over the lazy dog</h3>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">H4 - 1.375rem / 650 / -0.01em</div>
+      <h4>The quick brown fox jumps over the lazy dog</h4>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">H5 - 1.125rem / 600 / -0.005em</div>
+      <h5>The quick brown fox jumps over the lazy dog</h5>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">Body Large - 1.0625rem / 1.6 / 450</div>
+      <p class="body-lg">
+        The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, 
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+      </p>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">Body - 1rem / 1.6 / 400</div>
+      <p>
+        The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet, 
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+      </p>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">Small - 0.875rem / 1.5 / 450</div>
+      <p class="small-text">
+        The quick brown fox jumps over the lazy dog. Lorem ipsum dolor sit amet.
+      </p>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">Caption - 0.75rem / 1.45 / 500 / 0.01em</div>
+      <p class="caption">
+        The quick brown fox jumps over the lazy dog
+      </p>
+    </div>
+    
+    <div class="typography-specimen">
+      <div class="specimen-label">Monospace - JetBrains Mono</div>
+      <code style="display: block; padding: var(--sp-3); background: var(--surface-2); border-radius: var(--radius-sm);">
+        const greeting = "Hello, World!";<br>
+        console.log(greeting);
+      </code>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section class="spec-section">
+    <h2 class="spec-title">Spacing Scale</h2>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: var(--sp-4);">
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 4px; height: 4px;"></div>
+        <span class="spacing-label">--sp-1: 4px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 8px; height: 8px;"></div>
+        <span class="spacing-label">--sp-2: 8px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 12px; height: 12px;"></div>
+        <span class="spacing-label">--sp-3: 12px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+        <span class="spacing-label">--sp-4: 16px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 20px; height: 20px;"></div>
+        <span class="spacing-label">--sp-5: 20px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+        <span class="spacing-label">--sp-6: 24px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+        <span class="spacing-label">--sp-8: 32px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 40px; height: 40px;"></div>
+        <span class="spacing-label">--sp-10: 40px</span>
+      </div>
+      <div class="spacing-demo">
+        <div class="spacing-box" style="width: 48px; height: 48px;"></div>
+        <span class="spacing-label">--sp-12: 48px</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BORDER RADII -->
+  <section class="spec-section">
+    <h2 class="spec-title">Border Radii</h2>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: var(--sp-4); align-items: center;">
+      <div>
+        <div class="radius-demo" style="border-radius: var(--radius-sm);">10px<br>Small</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--radius-sm</code>
+        </div>
+      </div>
+      <div>
+        <div class="radius-demo" style="border-radius: var(--radius-md);">14px<br>Medium</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--radius-md</code>
+        </div>
+      </div>
+      <div>
+        <div class="radius-demo" style="border-radius: var(--radius-lg);">18px<br>Large</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--radius-lg</code>
+        </div>
+      </div>
+      <div>
+        <div class="radius-demo" style="border-radius: var(--radius-xl);">24px<br>X-Large</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--radius-xl</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHADOWS -->
+  <section class="spec-section">
+    <h2 class="spec-title">Shadows</h2>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: var(--sp-6); align-items: center;">
+      <div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-sm);">Small</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--shadow-sm</code>
+        </div>
+      </div>
+      <div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-md);">Medium</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--shadow-md</code>
+        </div>
+      </div>
+      <div>
+        <div class="shadow-demo" style="box-shadow: var(--shadow-lg);">Large</div>
+        <div style="text-align: center; margin-top: var(--sp-2); font-size: var(--text-small-size); color: var(--text-3);">
+          <code>--shadow-lg</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="spec-section">
+    <h2 class="spec-title">Components</h2>
+    
+    <!-- Buttons -->
+    <div class="component-showcase">
+      <h3 class="showcase-title">Buttons</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--sp-4); align-items: center;">
+        <button class="btn btn-primary btn-lg">Primary Large</button>
+        <button class="btn btn-primary btn-md">Primary Medium</button>
+        <button class="btn btn-primary btn-sm">Primary Small</button>
+        <button class="btn btn-ghost btn-lg">Ghost Large</button>
+        <button class="btn btn-ghost btn-md">Ghost Medium</button>
+        <button class="icon-btn">🔍</button>
+      </div>
+    </div>
+    
+    <!-- Inputs -->
+    <div class="component-showcase">
+      <h3 class="showcase-title">Inputs</h3>
+      <input type="text" class="input" placeholder="Standard input" style="max-width: 400px; margin-bottom: var(--sp-4);">
+      <input type="text" class="input input-lg" placeholder="Large input" style="max-width: 500px;">
+    </div>
+    
+    <!-- Chips -->
+    <div class="component-showcase">
+      <h3 class="showcase-title">Chips / Tabs</h3>
+      <div class="chips-group">
+        <button class="chip chip-active">Active Chip</button>
+        <button class="chip">PDF Tools</button>
+        <button class="chip">Image Tools</button>
+        <button class="chip">Text Tools</button>
+        <button class="chip">Developer Tools</button>
+      </div>
+    </div>
+    
+    <!-- Card -->
+    <div class="component-showcase">
+      <h3 class="showcase-title">Tool Card</h3>
+      <div style="max-width: 380px;">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-icon">📄</div>
+            <span class="card-tag card-tag-pdf">PDF Tools</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">PDF Merge</h5>
+            <p class="card-desc">
+              Combine multiple PDF files into a single document with ease. No file size limits.
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="card-link">
+              Open tool →
+            </a>
+            <div class="card-badges">
+              <span class="card-badge">🔒 Private</span>
+              <span class="card-badge">⚡ Fast</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: var(--sp-20); padding-top: var(--sp-8); border-top: 2px solid var(--border); text-align: center; color: var(--text-3);">
+    <p>ToolForFree Design System © 2026</p>
+    <p style="margin-top: var(--sp-2); font-size: var(--text-small-size);">
+      Use this specification to build consistent, beautiful interfaces.
+    </p>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
+
+</body>
+</html>
