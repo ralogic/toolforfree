@@ -1,16 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
 import ToolHero from '@/components/ToolHero';
 import ToolContainer from '@/components/ToolContainer';
 import FileUploader from '@/components/FileUploader';
 import FAQSection from '@/components/FAQSection';
 import RelatedTools from '@/components/RelatedTools';
 import { downloadFile } from '@/lib/utils';
-
-// Set up PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { getPdfJs } from '@/lib/lazy-loaders';
 
 export default function PDFToImagePage() {
   const [file, setFile] = useState<File | null>(null);
@@ -35,6 +32,7 @@ export default function PDFToImagePage() {
 
   const getPageCount = async (pdfFile: File) => {
     try {
+      const pdfjsLib = await getPdfJs();
       const arrayBuffer = await pdfFile.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       setPages(pdf.numPages);
@@ -60,6 +58,7 @@ export default function PDFToImagePage() {
 
     setLoading(true);
     try {
+      const pdfjsLib = await getPdfJs();
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
