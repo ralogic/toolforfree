@@ -13,9 +13,11 @@ export default function PdfUnlockPage() {
   const [processing, setProcessing] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
-  const handleFileSelect = (file: File) => {
-    setPdfFile(file);
-    setDownloadUrl(null);
+  const handleFileSelect = (files: File[]) => {
+    if (files.length > 0) {
+      setPdfFile(files[0]);
+      setDownloadUrl(null);
+    }
   };
 
   const unlockPdf = async () => {
@@ -56,7 +58,7 @@ export default function PdfUnlockPage() {
           <FileUploader
             accept=".pdf"
             onFileSelect={handleFileSelect}
-            maxSize={10}
+
             label="Upload Protected PDF"
           />
 

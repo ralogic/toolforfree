@@ -15,6 +15,7 @@ interface ToolsCatalog {
   utilityTools: ToolItem[];
   pdfTools: ToolItem[];
   imageTools: ToolItem[];
+  seoTools: ToolItem[];
   allTools: ToolItem[];
 }
 
@@ -64,6 +65,60 @@ export const TOOLS_CATALOG: ToolsCatalog = {
       description: 'Generate placeholder Lorem Ipsum text for design mockups and prototypes.',
       category: 'Text Tools',
       keywords: ['placeholder text', 'lorem ipsum', 'dummy text']
+    },
+    {
+      id: 26,
+      name: 'Text Diff Checker',
+      slug: 'text-diff-checker',
+      icon: '🔄',
+      description: 'Compare two texts side-by-side and highlight differences between them.',
+      category: 'Text Tools',
+      keywords: ['diff', 'compare', 'text comparison', 'difference']
+    },
+    {
+      id: 27,
+      name: 'Text Reverser',
+      slug: 'text-reverser',
+      icon: '↩️',
+      description: 'Reverse text, words, or lines instantly. Fun and useful for creative purposes.',
+      category: 'Text Tools',
+      keywords: ['reverse', 'flip', 'backwards text', 'mirror']
+    },
+    {
+      id: 28,
+      name: 'Extra Space Remover',
+      slug: 'extra-space-remover',
+      icon: '🧹',
+      description: 'Remove extra spaces, leading/trailing spaces, and clean up text formatting.',
+      category: 'Text Tools',
+      keywords: ['whitespace', 'cleanup', 'trim', 'formatting']
+    },
+    {
+      id: 29,
+      name: 'Slug Generator',
+      slug: 'slug-generator',
+      icon: '🔗',
+      description: 'Convert text into SEO-friendly URL slugs for web development.',
+      category: 'Text Tools',
+      keywords: ['slug', 'url', 'seo', 'web development']
+    },
+    {
+      id: 30,
+      name: 'Random Text Generator',
+      slug: 'random-text-generator',
+      icon: '🎲',
+      description: 'Generate random words, sentences, or paragraphs for testing and mockups.',
+      category: 'Text Tools',
+      keywords: ['random', 'generator', 'placeholder', 'testing']
+    },
+    {
+      id: 31,
+      name: 'Character Counter',
+      slug: 'character-counter',
+      icon: '🔤',
+      description: 'Count characters, words, and lines with detailed statistics including spaces.',
+      category: 'Text Tools',
+      keywords: ['character', 'count', 'length', 'statistics']
     }
   ],
   developerTools: [
@@ -111,6 +166,87 @@ export const TOOLS_CATALOG: ToolsCatalog = {
       description: 'Test and debug regular expressions with real-time matching and pattern validation.',
       category: 'Developer Tools',
       keywords: ['regex', 'regular expression', 'pattern matching', 'validation']
+    },
+    {
+      id: 32,
+      name: 'HTML Formatter',
+      slug: 'html-formatter',
+      icon: '🌐',
+      description: 'Format and beautify HTML code with proper indentation for better readability.',
+      category: 'Developer Tools',
+      keywords: ['html', 'formatter', 'beautify', 'code']
+    },
+    {
+      id: 33,
+      name: 'CSS Minifier',
+      slug: 'css-minifier',
+      icon: '🎨',
+      description: 'Minify CSS code by removing whitespace and comments to reduce file size.',
+      category: 'Developer Tools',
+      keywords: ['css', 'minify', 'compress', 'optimization']
+    },
+    {
+      id: 34,
+      name: 'JavaScript Minifier',
+      slug: 'js-minifier',
+      icon: '⚡',
+      description: 'Minify JavaScript code to reduce file size and improve load times.',
+      category: 'Developer Tools',
+      keywords: ['javascript', 'minify', 'compress', 'optimization']
+    },
+    {
+      id: 35,
+      name: 'JavaScript Beautifier',
+      slug: 'js-beautifier',
+      icon: '✨',
+      description: 'Format and beautify JavaScript code with proper indentation and structure.',
+      category: 'Developer Tools',
+      keywords: ['javascript', 'beautify', 'formatter', 'code']
+    },
+    {
+      id: 36,
+      name: 'SQL Formatter',
+      slug: 'sql-formatter',
+      icon: '🗄️',
+      description: 'Format SQL queries with proper indentation for better readability.',
+      category: 'Developer Tools',
+      keywords: ['sql', 'formatter', 'database', 'query']
+    },
+    {
+      id: 37,
+      name: 'XML Formatter',
+      slug: 'xml-formatter',
+      icon: '📋',
+      description: 'Format XML documents with proper indentation and structure.',
+      category: 'Developer Tools',
+      keywords: ['xml', 'formatter', 'beautify', 'markup']
+    },
+    {
+      id: 38,
+      name: 'Markdown to HTML',
+      slug: 'markdown-to-html',
+      icon: '📝',
+      description: 'Convert Markdown text to HTML code instantly for web publishing.',
+      category: 'Developer Tools',
+      keywords: ['markdown', 'html', 'convert', 'documentation']
+    },
+    {
+      id: 39,
+      name: 'HTML to Markdown',
+      slug: 'html-to-markdown',
+      icon: '📄',
+      description: 'Convert HTML code to Markdown format for documentation and notes.',
+      category: 'Developer Tools',
+      keywords: ['html', 'markdown', 'convert', 'documentation']
+    },
+    {
+      id: 40,
+      name: 'Hash Generator',
+      slug: 'hash-generator',
+      icon: '🔐',
+      description: 'Generate MD5, SHA-1, SHA-256 hashes for passwords and data integrity.',
+      category: 'Developer Tools',
+      keywords: ['hash', 'md5', 'sha256', 'encryption', 'security']
     }
   ],
   utilityTools: [
@@ -158,6 +294,51 @@ export const TOOLS_CATALOG: ToolsCatalog = {
       description: 'Calculate exact age in years, months, and days. Find out how many days you\'ve lived.',
       category: 'Utility Tools',
       keywords: ['age', 'calculator', 'date', 'birthday']
+    },
+    {
+      id: 41,
+      name: 'Percentage Calculator',
+      slug: 'percentage-calculator',
+      icon: '📊',
+      description: 'Calculate percentages, percentage change, and reverse percentage calculations.',
+      category: 'Utility Tools',
+      keywords: ['percentage', 'calculator', 'math', 'percentage change']
+    },
+    {
+      id: 42,
+      name: 'EMI Calculator',
+      slug: 'emi-calculator',
+      icon: '💰',
+      description: 'Calculate loan EMI with detailed breakdown of principal and interest payments.',
+      category: 'Utility Tools',
+      keywords: ['emi', 'loan', 'calculator', 'finance', 'interest']
+    },
+    {
+      id: 43,
+      name: 'GST Calculator',
+      slug: 'gst-calculator',
+      icon: '🧾',
+      description: 'Add or remove GST from amounts with automatic CGST/SGST breakdown.',
+      category: 'Utility Tools',
+      keywords: ['gst', 'tax', 'calculator', 'cgst', 'sgst']
+    },
+    {
+      id: 44,
+      name: 'Unit Converter',
+      slug: 'unit-converter',
+      icon: '📏',
+      description: 'Convert between length, weight, temperature, volume, and area units.',
+      category: 'Utility Tools',
+      keywords: ['unit', 'converter', 'measurement', 'length', 'weight']
+    },
+    {
+      id: 45,
+      name: 'Binary Converter',
+      slug: 'binary-converter',
+      icon: '🔢',
+      description: 'Convert between binary, decimal, and text for programming and education.',
+      category: 'Utility Tools',
+      keywords: ['binary', 'decimal', 'converter', 'programming', 'text']
     }
   ],
   pdfTools: [
@@ -205,6 +386,69 @@ export const TOOLS_CATALOG: ToolsCatalog = {
       description: 'Convert multiple images into a single PDF file.',
       category: 'PDF Tools',
       keywords: ['image', 'pdf', 'convert', 'combine']
+    },
+    {
+      id: 46,
+      name: 'PDF to Word Converter',
+      slug: 'pdf-to-word',
+      icon: '📝',
+      description: 'Convert PDF files to editable Word documents for easy editing.',
+      category: 'PDF Tools',
+      keywords: ['pdf', 'word', 'docx', 'convert', 'editable']
+    },
+    {
+      id: 47,
+      name: 'Word to PDF Converter',
+      slug: 'word-to-pdf',
+      icon: '📄',
+      description: 'Convert Word documents to PDF format for universal sharing.',
+      category: 'PDF Tools',
+      keywords: ['word', 'pdf', 'docx', 'convert', 'document']
+    },
+    {
+      id: 48,
+      name: 'PDF Rotator',
+      slug: 'pdf-rotate',
+      icon: '🔄',
+      description: 'Rotate PDF pages by 90, 180, or 270 degrees clockwise or counterclockwise.',
+      category: 'PDF Tools',
+      keywords: ['pdf', 'rotate', 'orientation', 'pages']
+    },
+    {
+      id: 49,
+      name: 'PDF Unlocker',
+      slug: 'pdf-unlock',
+      icon: '🔓',
+      description: 'Remove password protection from PDF files for easy access.',
+      category: 'PDF Tools',
+      keywords: ['pdf', 'unlock', 'password', 'security', 'remove']
+    },
+    {
+      id: 50,
+      name: 'PDF Password Protector',
+      slug: 'pdf-protect',
+      icon: '🔒',
+      description: 'Add password protection to PDF files to secure sensitive documents.',
+      category: 'PDF Tools',
+      keywords: ['pdf', 'protect', 'password', 'security', 'encrypt']
+    },
+    {
+      id: 51,
+      name: 'PDF Watermark',
+      slug: 'pdf-watermark',
+      icon: '💧',
+      description: 'Add text watermarks to PDF files for branding and copyright protection.',
+      category: 'PDF Tools',
+      keywords: ['pdf', 'watermark', 'branding', 'copyright', 'text']
+    },
+    {
+      id: 52,
+      name: 'PDF Page Remover',
+      slug: 'pdf-page-remover',
+      icon: '🗑️',
+      description: 'Remove unwanted pages from PDF files and create a cleaned document.',
+      category: 'PDF Tools',
+      keywords: ['pdf', 'remove', 'delete', 'pages', 'cleanup']
     }
   ],
   imageTools: [
@@ -252,6 +496,98 @@ export const TOOLS_CATALOG: ToolsCatalog = {
       description: 'Remove image backgrounds automatically with AI-powered recommendations.',
       category: 'Image Tools',
       keywords: ['image', 'background', 'remove', 'ai']
+    },
+    {
+      id: 53,
+      name: 'Image Metadata Viewer',
+      slug: 'image-metadata-viewer',
+      icon: '📋',
+      description: 'View detailed image metadata including EXIF data, dimensions, and file info.',
+      category: 'Image Tools',
+      keywords: ['image', 'metadata', 'exif', 'information', 'details']
+    },
+    {
+      id: 54,
+      name: 'Image EXIF Remover',
+      slug: 'image-exif-remover',
+      icon: '🔒',
+      description: 'Remove EXIF metadata from images to protect privacy and reduce file size.',
+      category: 'Image Tools',
+      keywords: ['image', 'exif', 'metadata', 'privacy', 'remove']
+    },
+    {
+      id: 55,
+      name: 'Image Watermark',
+      slug: 'image-watermark',
+      icon: '💧',
+      description: 'Add text or image watermarks to photos for copyright protection.',
+      category: 'Image Tools',
+      keywords: ['image', 'watermark', 'copyright', 'protection', 'branding']
+    },
+    {
+      id: 56,
+      name: 'Image Blur Tool',
+      slug: 'image-blur',
+      icon: '🌫️',
+      description: 'Apply blur effects to images or specific areas for privacy protection.',
+      category: 'Image Tools',
+      keywords: ['image', 'blur', 'effect', 'privacy', 'filter']
+    },
+    {
+      id: 57,
+      name: 'Image Color Picker',
+      slug: 'image-color-picker',
+      icon: '🎨',
+      description: 'Extract colors from images and get hex, RGB, and HSL color codes.',
+      category: 'Image Tools',
+      keywords: ['image', 'color', 'picker', 'hex', 'rgb', 'palette']
+    }
+  ],
+  seoTools: [
+    {
+      id: 58,
+      name: 'Meta Tag Generator',
+      slug: 'meta-tag-generator',
+      icon: '🏷️',
+      description: 'Generate HTML meta tags for SEO optimization and social media sharing.',
+      category: 'SEO Tools',
+      keywords: ['meta tags', 'seo', 'html', 'optimization', 'keywords']
+    },
+    {
+      id: 59,
+      name: 'Open Graph Generator',
+      slug: 'open-graph-generator',
+      icon: '📱',
+      description: 'Generate Open Graph tags for social media sharing on Facebook, Twitter, and LinkedIn.',
+      category: 'SEO Tools',
+      keywords: ['open graph', 'social media', 'facebook', 'twitter', 'meta tags']
+    },
+    {
+      id: 60,
+      name: 'Robots.txt Generator',
+      slug: 'robots-txt-generator',
+      icon: '🤖',
+      description: 'Generate robots.txt file to control how search engines crawl your website.',
+      category: 'SEO Tools',
+      keywords: ['robots.txt', 'seo', 'crawling', 'search engines', 'sitemap']
+    },
+    {
+      id: 61,
+      name: 'XML Sitemap Generator',
+      slug: 'sitemap-generator',
+      icon: '🗺️',
+      description: 'Generate XML sitemaps to help search engines discover and index your pages.',
+      category: 'SEO Tools',
+      keywords: ['sitemap', 'xml', 'seo', 'search engines', 'indexing']
+    },
+    {
+      id: 62,
+      name: 'Keyword Density Checker',
+      slug: 'keyword-density-checker',
+      icon: '🔍',
+      description: 'Analyze keyword frequency and density in your content for better SEO.',
+      category: 'SEO Tools',
+      keywords: ['keyword density', 'seo', 'content analysis', 'frequency', 'optimization']
     }
   ],
   allTools: []
@@ -263,7 +599,8 @@ TOOLS_CATALOG.allTools = [
   ...TOOLS_CATALOG.imageTools,
   ...TOOLS_CATALOG.textTools,
   ...TOOLS_CATALOG.developerTools,
-  ...TOOLS_CATALOG.utilityTools
+  ...TOOLS_CATALOG.utilityTools,
+  ...TOOLS_CATALOG.seoTools
 ];
 
 // Export for easy access

@@ -13,13 +13,16 @@ export default function ImageExifRemoverPage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const handleFileSelect = (file: File) => {
-    setImageFile(file);
-    setDownloadUrl(null);
-    
-    // Create preview
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+  const handleFileSelect = (files: File[]) => {
+    if (files.length > 0) {
+      const file = files[0];
+      setImageFile(file);
+      setDownloadUrl(null);
+      
+      // Create preview
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
   };
 
   const removeExif = async () => {
@@ -72,7 +75,6 @@ export default function ImageExifRemoverPage() {
           <FileUploader
             accept="image/*"
             onFileSelect={handleFileSelect}
-            maxSize={10}
             label="Upload Image"
           />
 

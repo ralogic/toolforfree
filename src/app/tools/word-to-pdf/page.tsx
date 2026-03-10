@@ -12,9 +12,11 @@ export default function WordToPdfPage() {
   const [converting, setConverting] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
-  const handleFileSelect = (file: File) => {
-    setWordFile(file);
-    setDownloadUrl(null);
+  const handleFileSelect = (files: File[]) => {
+    if (files.length > 0) {
+      setWordFile(files[0]);
+      setDownloadUrl(null);
+    }
   };
 
   const convertToPdf = async () => {
@@ -54,7 +56,7 @@ export default function WordToPdfPage() {
           <FileUploader
             accept=".doc,.docx"
             onFileSelect={handleFileSelect}
-            maxSize={10}
+
             label="Upload Word Document"
           />
 

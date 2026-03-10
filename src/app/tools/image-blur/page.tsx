@@ -15,12 +15,15 @@ export default function ImageBlurPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleFileSelect = (file: File) => {
-    setImageFile(file);
-    setDownloadUrl(null);
-    
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+  const handleFileSelect = (files: File[]) => {
+    if (files.length > 0) {
+      const file = files[0];
+      setImageFile(file);
+      setDownloadUrl(null);
+      
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
   };
 
   const applyBlur = async () => {
@@ -78,7 +81,6 @@ export default function ImageBlurPage() {
           <FileUploader
             accept="image/*"
             onFileSelect={handleFileSelect}
-            maxSize={10}
             label="Upload Image"
           />
 

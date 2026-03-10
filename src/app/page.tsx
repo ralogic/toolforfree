@@ -3,10 +3,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import Script from 'next/script';
 import { motion } from 'framer-motion';
 import SearchBar from '@/components/SearchBar';
 import AnimatedSection from '@/components/AnimatedSection';
 import { TOOLS_CATALOG, searchTools } from '@/lib/tools-catalog';
+import { 
+  generateOrganizationSchema, 
+  generateWebSiteSchema, 
+  generateFAQSchema,
+  generateItemListSchema 
+} from '@/lib/seo';
 
 const ToolGrid = dynamic(() => import('@/components/ToolGrid'), {
   loading: () => (
@@ -212,6 +219,162 @@ export default function Home() {
           })}
         </div>
       </AnimatedSection>
+
+      {/* FAQ Section for SEO */}
+      <AnimatedSection delay={0.15} className="mx-auto mt-20 w-full max-w-4xl">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Frequently Asked Questions</h2>
+          <p className="mt-2 text-sm text-[var(--text-secondary)]">Everything you need to know about ToolForFree</p>
+        </div>
+
+        <div className="grid gap-4">
+          {[
+            {
+              q: 'Are all tools completely free to use?',
+              a: 'Yes! All tools on ToolForFree are 100% free with no hidden charges, signup requirements, or usage limits. We believe in providing accessible tools for everyone.',
+            },
+            {
+              q: 'Do I need to create an account to use the tools?',
+              a: 'No account needed! All tools work instantly in your browser without any registration or login. Just visit the tool page and start using it right away.',
+            },
+            {
+              q: 'Is my data secure and private?',
+              a: 'Absolutely! All processing happens directly in your browser. Files never leave your device, and we do not store, transmit, or have access to your data. Your privacy is our top priority.',
+            },
+            {
+              q: 'What types of tools are available?',
+              a: 'We offer PDF tools (merge, split, compress), image tools (compress, resize, convert), text tools (word counter, case converter), and developer tools (JSON formatter, Base64 encoder, hash generator).',
+            },
+            {
+              q: 'Can I use these tools on mobile devices?',
+              a: 'Yes! All tools are fully responsive and work seamlessly on desktop, tablet, and mobile devices. Access them from any device with a modern web browser.',
+            },
+            {
+              q: 'Are there any file size limitations?',
+              a: 'Most tools can handle files up to 100MB. Processing happens in your browser, so performance may vary based on your device capabilities and file size.',
+            },
+          ].map((faq, index) => (
+            <details
+              key={index}
+              className="glass-card group rounded-xl p-5 transition-all hover:border-[var(--brand-soft)]"
+            >
+              <summary className="cursor-pointer text-base font-semibold text-[var(--text-primary)] list-none flex items-center justify-between">
+                {faq.q}
+                <span className="text-[var(--text-muted)] transition-transform group-open:rotate-180">▼</span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </AnimatedSection>
+
+      {/* SEO Content Section */}
+      <AnimatedSection delay={0.2} className="mx-auto mt-20 w-full max-w-5xl">
+        <div className="glass-card rounded-2xl p-8 md:p-12">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">Why Choose ToolForFree?</h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">🚀 Fast & Efficient</h3>
+              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                All tools process files instantly in your browser. No server uploads, no waiting times, no queues.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">🔒 100% Private</h3>
+              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                Your files never leave your device. All processing happens locally in your browser for maximum privacy.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">💰 Completely Free</h3>
+              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                No subscriptions, no trials, no hidden fees. Every tool is free to use without limitations.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">🎯 No Signup Required</h3>
+              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                Start using tools immediately. No registration, no email verification, no unnecessary steps.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold text-[var(--text-primary)]">Popular Use Cases</h3>
+            <ul className="mt-3 grid gap-2 text-sm text-[var(--text-secondary)] md:grid-cols-2">
+              <li>✓ Merge multiple PDF documents online</li>
+              <li>✓ Compress images without quality loss</li>
+              <li>✓ Format and validate JSON data</li>
+              <li>✓ Convert text case for content writing</li>
+              <li>✓ Generate secure passwords instantly</li>
+              <li>✓ Encode and decode Base64 strings</li>
+              <li>✓ Count words and characters for SEO</li>
+              <li>✓ Calculate age, EMI, and GST easily</li>
+            </ul>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Structured Data for SEO */}
+      <Script
+        id="organization-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateOrganizationSchema()),
+        }}
+      />
+      <Script
+        id="website-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateWebSiteSchema()),
+        }}
+      />
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateFAQSchema([
+              {
+                question: 'Are all tools completely free to use?',
+                answer: 'Yes! All tools on ToolForFree are 100% free with no hidden charges, signup requirements, or usage limits.',
+              },
+              {
+                question: 'Do I need to create an account to use the tools?',
+                answer: 'No account needed! All tools work instantly in your browser without any registration or login.',
+              },
+              {
+                question: 'Is my data secure and private?',
+                answer: 'Absolutely! All processing happens directly in your browser. Files never leave your device.',
+              },
+              {
+                question: 'What types of tools are available?',
+                answer: 'We offer PDF tools, image tools, text tools, and developer tools including JSON formatter, Base64 encoder, and more.',
+              },
+              {
+                question: 'Can I use these tools on mobile devices?',
+                answer: 'Yes! All tools are fully responsive and work seamlessly on desktop, tablet, and mobile devices.',
+              },
+            ])
+          ),
+        }}
+      />
+      <Script
+        id="itemlist-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateItemListSchema(
+              popularTools.slice(0, 8).map((tool) => ({
+                name: tool.name,
+                url: `https://toolforfree.in/tools/${tool.slug}`,
+                description: tool.description,
+              }))
+            )
+          ),
+        }}
+      />
     </main>
   );
 }

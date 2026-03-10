@@ -15,12 +15,15 @@ export default function ImageColorPickerPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
-  const handleFileSelect = (file: File) => {
-    setImageFile(file);
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
-    setSelectedColor(null);
-    setColorHistory([]);
+  const handleFileSelect = (files: File[]) => {
+    if (files.length > 0) {
+      const file = files[0];
+      setImageFile(file);
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      setSelectedColor(null);
+      setColorHistory([]);
+    }
   };
 
   const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -75,7 +78,6 @@ export default function ImageColorPickerPage() {
           <FileUploader
             accept="image/*"
             onFileSelect={handleFileSelect}
-            maxSize={10}
             label="Upload Image"
           />
 

@@ -21,33 +21,36 @@ export default function ImageMetadataViewerPage() {
   const [metadata, setMetadata] = useState<ImageMetadata | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const handleFileSelect = async (file: File) => {
-    setImageFile(file);
-    setMetadata(null);
+  const handleFileSelect = async (files: File[]) => {
+    if (files.length > 0) {
+      const file = files[0];
+      setImageFile(file);
+      setMetadata(null);
 
-    // Create preview
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+      // Create preview
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
 
-    // Load image to get dimensions
-    const img = new Image();
-    img.onload = () => {
-      const meta: ImageMetadata = {
-        fileName: file.name,
-        fileSize: (file.size / 1024 / 1024).toFixed(2) + ' MB',
-        fileType: file.type,
-        dimensions: `${img.width} × ${img.height} pixels`,
-        lastModified: new Date(file.lastModified).toLocaleString()
+      // Load image to get dimensions
+      const img = new Image();
+      img.onload = () => {
+        const meta: ImageMetadata = {
+          fileName: file.name,
+          fileSize: (file.size / 1024 / 1024).toFixed(2) + ' MB',
+          fileType: file.type,
+          dimensions: `${img.width} × ${img.height} pixels`,
+          lastModified: new Date(file.lastModified).toLocaleString()
+        };
+        setMetadata(meta);
       };
-      setMetadata(meta);
-    };
-    img.src = url;
+      img.src = url;
 
-    // In production, use exif-js or similar to extract EXIF data
-    // EXIF.getData(file, function() {
-    //   const exifData = EXIF.getAllTags(this);
-    //   setMetadata(prev => ({ ...prev, exif: exifData }));
-    // });
+      // In production, use exif-js or similar to extract EXIF data
+      // EXIF.getData(file, function() {
+      //   const exifData = EXIF.getAllTags(this);
+      //   setMetadata(prev => ({ ...prev, exif: exifData }));
+      // });
+    }
   };
 
   return (
@@ -63,7 +66,6 @@ export default function ImageMetadataViewerPage() {
           <FileUploader
             accept="image/*"
             onFileSelect={handleFileSelect}
-            maxSize={10}
             label="Upload Image"
           />
 

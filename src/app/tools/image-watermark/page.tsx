@@ -15,9 +15,11 @@ export default function ImageWatermarkPage() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const handleFileSelect = (file: File) => {
-    setImageFile(file);
-    setDownloadUrl(null);
+  const handleFileSelect = (files: File[]) => {
+    if (files.length > 0) {
+      setImageFile(files[0]);
+      setDownloadUrl(null);
+    }
   };
 
   const addWatermark = async () => {
@@ -89,7 +91,6 @@ export default function ImageWatermarkPage() {
           <FileUploader
             accept="image/*"
             onFileSelect={handleFileSelect}
-            maxSize={10}
             label="Upload Image"
           />
 

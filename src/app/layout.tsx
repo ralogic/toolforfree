@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import Script from 'next/script';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ToastContainer } from '@/components/Toast';
@@ -18,24 +19,76 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'ToolForFree – Free Online PDF, Image & Developer Tools',
-  description: 'ToolForFree provides free online tools for images, PDFs, text and developers. Fast, secure and no signup required.',
-  keywords: 'free online tools, pdf tools, image tools, developer tools',
-  authors: [{ name: 'ToolForFree' }],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://toolforfree.in'),
+  title: {
+    default: 'ToolForFree - Free Online PDF, Image & Developer Tools',
+    template: '%s - ToolForFree',
+  },
+  description: 'Free online tools for PDF, images, text and developers. Merge PDFs, compress images, format JSON, and more. Fast, secure, no signup required.',
+  keywords: [
+    'free online tools',
+    'pdf tools free',
+    'image compressor online',
+    'merge pdf online',
+    'developer tools',
+    'json formatter',
+    'base64 encoder',
+    'text tools',
+    'word counter',
+    'password generator',
+  ],
+  authors: [{ name: 'ToolForFree', url: 'https://toolforfree.in' }],
+  creator: 'ToolForFree',
+  publisher: 'ToolForFree',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/assets/images/favicon.png',
+    shortcut: '/assets/images/favicon.png',
+    apple: '/assets/images/favicon.png',
   },
+  manifest: '/site.webmanifest',
   openGraph: {
-    title: 'ToolForFree – Free Online Tools',
-    description: 'Free online tools for PDF, image, text and developers. No login required.',
     type: 'website',
-    url: 'https://toolforfree.in/',
-    images: '/assets/images/og-image.png',
+    locale: 'en_US',
+    url: 'https://toolforfree.in',
+    title: 'ToolForFree - Free Online PDF, Image & Developer Tools',
+    description: 'Free online tools for PDF, images, text and developers. Fast, secure and no signup required.',
+    siteName: 'ToolForFree',
+    images: [
+      {
+        url: '/assets/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'ToolForFree - Free Online Tools',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ToolForFree - Free Online PDF, Image & Developer Tools',
+    description: 'Free online tools for PDF, images, text and developers. Fast, secure and no signup required.',
+    images: ['/assets/images/og-image.png'],
+    creator: '@toolforfree',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  alternates: {
+    canonical: 'https://toolforfree.in',
+  },
+  category: 'technology',
 };
 
 export default function RootLayout({
@@ -43,6 +96,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'ToolForFree',
+    url: 'https://toolforfree.in',
+  };
+
   return (
     <html lang="en">
       <head>
@@ -50,30 +110,32 @@ export default function RootLayout({
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
-        
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-[var(--bg-page)] text-[var(--text-primary)] antialiased relative`}>
         {/* Schema.org Website markup */}
-        <script
+        <Script
+          id="website-jsonld"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'ToolForFree',
-              url: 'https://toolforfree.in',
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         
         {/* Google AdSense */}
-        <script
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1194350296944754"
           crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
 
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F54ZZ47D8R" />
-        <script
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-F54ZZ47D8R"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -83,8 +145,7 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-[var(--bg-page)] text-[var(--text-primary)] antialiased relative`}>
+
         <FloatingShapes />
         <GradientOrbs />
         <div className="relative z-10">

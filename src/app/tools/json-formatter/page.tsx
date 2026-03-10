@@ -6,9 +6,14 @@ import ToolContainer from '@/components/ToolContainer';
 import ResultBox from '@/components/ResultBox';
 import FAQSection from '@/components/FAQSection';
 import RelatedTools from '@/components/RelatedTools';
+import ToolSEO from '@/components/ToolSEO';
 import { formatJSON, minifyJSON } from '@/lib/utils';
+import { getToolBySlug, getRelatedTools } from '@/lib/tool-seo';
 
 export default function JSONFormatterPage() {
+  const tool = getToolBySlug('json-formatter');
+  const relatedTools = getRelatedTools(tool || {} as any, 3);
+  
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
@@ -43,12 +48,30 @@ export default function JSONFormatterPage() {
     processJSON(input, newMode);
   };
 
+  const toolFAQs = [
+    {
+      question: 'What is JSON formatting?',
+      answer: 'JSON formatting adds indentation, line breaks, and proper spacing to make JSON data readable. It transforms minified JSON into a structured, easy-to-read format.',
+    },
+    {
+      question: 'When should I minify JSON?',
+      answer: 'Minify JSON for production APIs, configuration files, or when transmitting data over networks. Minified JSON is smaller and faster to transfer but harder to read.',
+    },
+    {
+      question: 'Can this tool validate JSON syntax?',
+      answer: 'Yes! The tool automatically detects and reports JSON syntax errors, helping you identify issues like missing commas, unclosed brackets, or invalid characters.',
+    },
+  ];
+
   return (
     <>
+      {/* SEO Structured Data */}
+      {tool && <ToolSEO tool={tool} additionalFAQs={toolFAQs} />}
+      
       <ToolHero
         icon="{ }"
-        title="JSON Formatter"
-        description="Format, validate, and minify JSON with one click. Perfect for debugging and code review."
+        title="JSON Formatter & Validator"
+        description="Format, validate, and minify JSON online. Free JSON formatter with syntax highlighting and error detection. No signup required."
       />
 
       <ToolContainer title="Mode">
@@ -106,68 +129,104 @@ export default function JSONFormatterPage() {
         </ToolContainer>
       )}
 
-      <ToolContainer title="How to Use">
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-2">Step 1: Paste JSON</h3>
-            <p className="text-gray-700">Paste your JSON code into the input textarea.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-2">Step 2: Choose Mode</h3>
-            <p className="text-gray-700">Select Format for readable output or Minify to reduce file size.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-2">Step 3: Copy Result</h3>
-            <p className="text-gray-700">Copy the processed JSON and use it in your project.</p>
+      {/* SEO Content Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">How to Use JSON Formatter</h2>
+          <div className="space-y-4 text-gray-700">
+            <div className="flex items-start gap-3">
+              <span className="font-semibold text-blue-600 text-lg">1.</span>
+              <div>
+                <h3 className="font-semibold mb-1">Paste Your JSON</h3>
+                <p>Copy your JSON code and paste it into the input textarea above.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="font-semibold text-blue-600 text-lg">2.</span>
+              <div>
+                <h3 className="font-semibold mb-1">Choose Format or Minify</h3>
+                <p>Select "Format" for readable output with indentation, or "Minify" to compress.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="font-semibold text-blue-600 text-lg">3.</span>
+              <div>
+                <h3 className="font-semibold mb-1">Copy the Result</h3>
+                <p>Click the copy button to save the processed JSON to your clipboard.</p>
+              </div>
+            </div>
           </div>
         </div>
-      </ToolContainer>
+      </section>
 
-      <ToolContainer title="Features">
-        <ul className="space-y-2">
+      <ToolContainer title="Key Features">
+        <ul className="space-y-3">
           <li className="flex items-start gap-3">
-            <span className="text-green-600 mt-1">✓</span>
-            <span className="text-gray-700"><strong>Format & beautify:</strong> Add proper indentation and line breaks</span>
+            <span className="text-green-600 text-xl mt-0.5">✓</span>
+            <div>
+              <strong className="text-gray-900">Format & Beautify:</strong>
+              <span className="text-gray-700 ml-1">Transform minified JSON into readable format with proper indentation</span>
+            </div>
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-green-600 mt-1">✓</span>
-            <span className="text-gray-700"><strong>Minify:</strong> Remove whitespace to reduce file size</span>
+            <span className="text-green-600 text-xl mt-0.5">✓</span>
+            <div>
+              <strong className="text-gray-900">Minify & Compress:</strong>
+              <span className="text-gray-700 ml-1">Remove all whitespace to reduce file size for production</span>
+            </div>
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-green-600 mt-1">✓</span>
-            <span className="text-gray-700"><strong>Validation:</strong> Detects invalid JSON automatically</span>
+            <span className="text-green-600 text-xl mt-0.5">✓</span>
+            <div>
+              <strong className="text-gray-900">Syntax Validation:</strong>
+              <span className="text-gray-700 ml-1">Automatically detect and report JSON errors with helpful messages</span>
+            </div>
           </li>
           <li className="flex items-start gap-3">
-            <span className="text-green-600 mt-1">✓</span>
-            <span className="text-gray-700"><strong>Real-time:</strong> Instant processing as you type</span>
+            <span className="text-green-600 text-xl mt-0.5">✓</span>
+            <div>
+              <strong className="text-gray-900">Real-time Processing:</strong>
+              <span className="text-gray-700 ml-1">Instant results as you type, no manual trigger needed</span>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-green-600 text-xl mt-0.5">✓</span>
+            <div>
+              <strong className="text-gray-900">100% Private:</strong>
+              <span className="text-gray-700 ml-1">All processing happens in your browser, data never leaves your device</span>
+            </div>
           </li>
         </ul>
       </ToolContainer>
 
-      <FAQSection
-        items={[
-          {
-            question: 'What is JSON formatting?',
-            answer: 'Formatting adds indentation and line breaks to make JSON readable for humans. Minifying removes all whitespace to reduce file size.'
-          },
-          {
-            question: 'How do I use minified JSON?',
-            answer: 'Minified JSON is smaller and faster to transmit over networks. Use it for production APIs and data files.'
-          },
-          {
-            question: 'Is my data stored?',
-            answer: 'No. All processing happens in your browser. Your data is never sent to any server.'
-          }
-        ]}
-      />
+      {/* Why Use Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Why Use This JSON Formatter?</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">🚀 Fast & Efficient</h3>
+              <p className="text-gray-700">Process JSON instantly without server delays. Works completely offline in your browser.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">🔒 Secure & Private</h3>
+              <p className="text-gray-700">Your JSON data never leaves your computer. Perfect for sensitive configuration files.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">💰 Completely Free</h3>
+              <p className="text-gray-700">No subscriptions, no limits, no watermarks. Use as much as you need.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">🎯 Developer Friendly</h3>
+              <p className="text-gray-700">Built for developers with real-time validation and clear error messages.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <RelatedTools
-        tools={[
-          { name: 'Base64 Encoder', slug: 'base64-encoder-decoder', icon: '🔐' },
-          { name: 'JWT Decoder', slug: 'jwt-decoder', icon: '🔑' },
-          { name: 'URL Encoder', slug: 'url-encoder-decoder', icon: '🌐' }
-        ]}
-      />
+      <FAQSection items={toolFAQs} />
+
+      {relatedTools.length > 0 && <RelatedTools tools={relatedTools} />}
     </>
   );
 }
