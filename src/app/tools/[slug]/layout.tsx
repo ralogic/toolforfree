@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { TOOLS_CATALOG } from '@/lib/tools-catalog';
-import { generateMetadata as generateSEOMetadata, generateWebApplicationSchema } from '@/lib/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 interface ToolPageLayoutProps {
   children: React.ReactNode;
