@@ -21,18 +21,60 @@ export async function loadPdfLib() {
 
 /**
  * Lazy load pdfjs-dist for PDF rendering
- * @returns Promise resolving to the pdfjs-dist module with worker configured
+ * @returns Promise resolving to the PDF.js module with worker configured
  */
 export async function loadPdfJs() {
   try {
-    const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs');
-    
-    // Configure worker - use CDN worker for simplicity
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
-    
+    const pdfVersion = '3.11.174';
+    const scriptId = 'pdfjs-cdn-script';
+    const scriptSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfVersion}/pdf.min.js`;
+    const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfVersion}/pdf.worker.min.js`;
+
+    if (typeof window === 'undefined') {
+      throw new Error('PDF.js can only be loaded in the browser.');
+    }
+
+    type PdfJsModule = {
+      version: string;
+      GlobalWorkerOptions: { workerSrc: string };
+      getDocument: (params: unknown) => { promise: Promise<any> };
+    };
+
+    const windowWithPdf = window as Window & { pdfjsLib?: PdfJsModule };
+
+    if (!windowWithPdf.pdfjsLib) {
+      await new Promise<void>((resolve, reject) => {
+        const existingScript = document.getElementById(scriptId) as HTMLScriptElement | null;
+        if (existingScript) {
+          if (windowWithPdf.pdfjsLib) {
+            resolve();
+            return;
+          }
+
+          existingScript.addEventListener('load', () => resolve(), { once: true });
+          existingScript.addEventListener('error', () => reject(new Error('Failed to load PDF.js script.')), { once: true });
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = scriptSrc;
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error('Failed to load PDF.js script.'));
+        document.head.appendChild(script);
+      });
+    }
+
+    const pdfjsLib = windowWithPdf.pdfjsLib;
+    if (!pdfjsLib) {
+      throw new Error('PDF.js did not initialize correctly.');
+    }
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
     return pdfjsLib;
   } catch (error) {
-    console.error('Failed to load pdfjs-dist:', error);
+    console.error('Failed to load PDF.js:', error);
     throw new Error('Failed to load PDF viewer library. Please try again.');
   }
 }
