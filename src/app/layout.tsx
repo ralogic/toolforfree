@@ -3,9 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ToastContainer } from '@/components/Toast';
-import FloatingShapes from '@/components/FloatingShapes';
-import GradientOrbs from '@/components/GradientOrbs';
+import DeferredGlobalUI from '@/components/DeferredGlobalUI';
 import './globals.css';
 
 const geistSans = Geist({
@@ -146,13 +144,11 @@ export default function RootLayout({
           }}
         />
 
-        <FloatingShapes />
-        <GradientOrbs />
+        <DeferredGlobalUI />
         <div className="relative z-10">
           <Navbar />
           {children}
           <Footer />
-          <ToastContainer />
         </div>
       </body>
     </html>

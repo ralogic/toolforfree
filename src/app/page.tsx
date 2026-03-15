@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Script from 'next/script';
-import { motion } from 'framer-motion';
 import SearchBar from '@/components/SearchBar';
 import AnimatedSection from '@/components/AnimatedSection';
 import { TOOLS_CATALOG, searchTools } from '@/lib/tools-catalog';
@@ -112,7 +111,7 @@ export default function Home() {
   return (
     <main className="px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24">
       <section className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
+        <div className="hero-enter">
           <span className="inline-flex rounded-full border border-[var(--border-soft)] bg-[var(--bg-elevated)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
             Developer Platform
           </span>
@@ -137,7 +136,7 @@ export default function Home() {
               Open JSON Formatter
             </Link>
           </div>
-        </motion.div>
+        </div>
 
         <div className="relative">
           <div className="surface-card relative overflow-hidden rounded-3xl p-6">
@@ -146,17 +145,15 @@ export default function Home() {
 
             <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-2">
               {floatingPreviewTools.map((tool) => (
-                <motion.article
+                <article
                   key={tool.title}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: tool.delay, duration: 0.4 }}
-                  className="glass-card grid-float rounded-2xl p-4"
+                  className="glass-card grid-float preview-enter rounded-2xl p-4"
+                  style={{ animationDelay: `${tool.delay}s` }}
                 >
                   <p className="text-2xl">{tool.icon}</p>
                   <h3 className="mt-3 text-sm font-semibold text-[var(--text-primary)]">{tool.title}</h3>
                   <p className="mt-1 text-xs text-[var(--text-muted)]">Fast processing with privacy-first workflow</p>
-                </motion.article>
+                </article>
               ))}
             </div>
           </div>
@@ -182,7 +179,7 @@ export default function Home() {
         />
       </AnimatedSection>
 
-      <AnimatedSection delay={0.05} className="mx-auto mt-16 w-full max-w-7xl">
+      <AnimatedSection delay={0.05} className="content-visibility-auto mx-auto mt-16 w-full max-w-7xl">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Popular Tools</h2>
@@ -193,7 +190,7 @@ export default function Home() {
         <ToolGrid tools={popularTools} />
       </AnimatedSection>
 
-      <AnimatedSection delay={0.1} className="mx-auto mt-18 w-full max-w-7xl">
+      <AnimatedSection delay={0.1} className="content-visibility-auto mx-auto mt-18 w-full max-w-7xl">
         <div className="mb-6">
           <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Categories</h2>
           <p className="mt-1 text-sm text-[var(--text-secondary)]">Jump to your workflow in a single click.</p>
@@ -221,7 +218,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* FAQ Section for SEO */}
-      <AnimatedSection delay={0.15} className="mx-auto mt-20 w-full max-w-4xl">
+      <AnimatedSection delay={0.15} className="content-visibility-auto mx-auto mt-20 w-full max-w-4xl">
         <div className="mb-8 text-center">
           <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Frequently Asked Questions</h2>
           <p className="mt-2 text-sm text-[var(--text-secondary)]">Everything you need to know about ToolForFree</p>
@@ -269,7 +266,7 @@ export default function Home() {
       </AnimatedSection>
 
       {/* SEO Content Section */}
-      <AnimatedSection delay={0.2} className="mx-auto mt-20 w-full max-w-5xl">
+      <AnimatedSection delay={0.2} className="content-visibility-auto mx-auto mt-20 w-full max-w-5xl">
         <div className="glass-card rounded-2xl p-8 md:p-12">
           <h2 className="text-2xl font-semibold text-[var(--text-primary)]">Why Choose ToolForFree?</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-2">
