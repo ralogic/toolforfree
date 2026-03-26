@@ -9,8 +9,8 @@ const MAX_REQUESTS = 100; // requests per window
 
 function getRateLimitKey(request: NextRequest): string {
   // Use IP or forwarded IP
-  const ip = request.headers.get('x-forwarded-for') || 
-             request.headers.get('x-real-ip') || 
+  const ip = request.headers.get('x-forwarded-for') ||
+             request.headers.get('x-real-ip') ||
              'unknown';
   return ip;
 }
@@ -46,7 +46,7 @@ setInterval(() => {
   }
 }, RATE_LIMIT_WINDOW);
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Only apply rate limiting to API routes
   if (request.nextUrl.pathname.startsWith('/api/')) {
     const key = getRateLimitKey(request);
@@ -55,7 +55,7 @@ export function middleware(request: NextRequest) {
     if (!allowed) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
-        { 
+        {
           status: 429,
           headers: {
             'X-RateLimit-Limit': MAX_REQUESTS.toString(),

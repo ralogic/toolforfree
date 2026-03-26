@@ -3,8 +3,17 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { Search } from 'lucide-react';
-import ThemeToggle from '@/components/ThemeToggle';
+
+const ThemeToggle = dynamic(() => import('@/components/ThemeToggle'), {
+  loading: () => (
+    <span
+      className="inline-block h-10 w-10 rounded-xl border border-[var(--border-soft)] bg-[var(--bg-elevated)]"
+      aria-hidden="true"
+    />
+  ),
+});
 
 const NAV_ITEMS = [
   { href: '/tools', label: 'Tools' },

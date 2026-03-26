@@ -122,18 +122,18 @@ export default function RootLayout({
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1194350296944754"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         {/* Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-F54ZZ47D8R"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

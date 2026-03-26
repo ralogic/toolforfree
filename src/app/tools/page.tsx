@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -33,6 +33,50 @@ const searchCategories = [
   { key: 'text', label: 'Text' },
   { key: 'utility', label: 'Utility' },
 ];
+
+function LazyRenderSection({
+  children,
+  fallbackClassName,
+}: {
+  children: ReactNode;
+  fallbackClassName: string;
+}) {
+  const [isReady, setIsReady] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isReady) {
+      return;
+    }
+
+    const section = sectionRef.current;
+    if (!section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsReady(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '220px 0px',
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [isReady]);
+
+  return (
+    <div ref={sectionRef}>
+      {isReady ? children : <div className={fallbackClassName} aria-hidden="true" />}
+    </div>
+  );
+}
 
 export default function ToolsCatalogPage() {
   const searchParams = useSearchParams();
@@ -146,20 +190,22 @@ export default function ToolsCatalogPage() {
         )}
       </section>
 
-      <section className="surface-card mt-14 rounded-3xl p-8 sm:p-10">
-        <h2 className="text-2xl font-semibold text-[var(--text-primary)]">Need a New Tool?</h2>
-        <p className="mt-3 max-w-2xl text-sm text-[var(--text-secondary)]">
-          ToolForFree is continuously evolving. Share your request and we will prioritize tools that help developer workflows most.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <Link href="/contact" className="ripple rounded-xl bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--brand-strong)]">
-            Suggest a Tool
-          </Link>
-          <Link href="/" className="rounded-xl border border-[var(--border-soft)] bg-[var(--bg-elevated)] px-5 py-3 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-[var(--brand-soft)] hover:text-[var(--brand-strong)]">
-            Back to Home
-          </Link>
-        </div>
-      </section>
+      <LazyRenderSection fallbackClassName="surface-card mt-14 h-56 rounded-3xl">
+        <section className="surface-card mt-14 rounded-3xl p-8 sm:p-10">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">Need a New Tool?</h2>
+          <p className="mt-3 max-w-2xl text-sm text-[var(--text-secondary)]">
+            ToolForFree is continuously evolving. Share your request and we will prioritize tools that help developer workflows most.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link href="/contact" className="ripple rounded-xl bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--brand-strong)]">
+              Suggest a Tool
+            </Link>
+            <Link href="/" className="rounded-xl border border-[var(--border-soft)] bg-[var(--bg-elevated)] px-5 py-3 text-sm font-semibold text-[var(--text-secondary)] transition hover:border-[var(--brand-soft)] hover:text-[var(--brand-strong)]">
+              Back to Home
+            </Link>
+          </div>
+        </section>
+      </LazyRenderSection>
     </main>
   );
 }

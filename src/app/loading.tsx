@@ -1,13 +1,14 @@
 export default function Loading() {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="skeleton-block h-12 w-72 rounded-xl" />
-      <div className="mt-4 skeleton-block h-5 w-full max-w-2xl rounded-lg" />
-      <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div key={`loader-${index}`} className="surface-card skeleton-block h-56 rounded-2xl" />
-        ))}
+    <main className="route-loader-wrap" aria-busy="true" aria-live="polite">
+      <div className="route-loader-card">
+        <p className="route-loader-icon" aria-hidden="true">🏆</p>
+        <h2 className="route-loader-quote">
+          I&apos;m obsessed with perfection. I want to work. I don&apos;t want to take this for granted. - Drake
+        </h2>
+        <p className="route-loader-author">- peter</p>
+        <div className="route-loader-spinner" aria-label="Loading" />
       </div>
-    </div>
+    </main>
   );
 }

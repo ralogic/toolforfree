@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Script from 'next/script';
@@ -23,6 +23,52 @@ const ToolGrid = dynamic(() => import('@/components/ToolGrid'), {
     </div>
   ),
 });
+
+function LazyRenderSection({
+  children,
+  fallbackClassName,
+}: {
+  children: ReactNode;
+  fallbackClassName: string;
+}) {
+  const [isReady, setIsReady] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isReady) {
+      return;
+    }
+
+    const section = sectionRef.current;
+    if (!section) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsReady(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '220px 0px',
+      }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isReady]);
+
+  return (
+    <div ref={sectionRef}>
+      {isReady ? children : <div className={fallbackClassName} aria-hidden="true" />}
+    </div>
+  );
+}
 
 const categories = [
   {
@@ -191,78 +237,82 @@ export default function Home() {
       </AnimatedSection>
 
       <AnimatedSection delay={0.1} className="content-visibility-auto mx-auto mt-18 w-full max-w-7xl">
-        <div className="mb-6">
-          <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Categories</h2>
-          <p className="mt-1 text-sm text-[var(--text-secondary)]">Jump to your workflow in a single click.</p>
-        </div>
+        <LazyRenderSection fallbackClassName="surface-card skeleton-block h-72 rounded-2xl">
+          <div className="mb-6">
+            <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Categories</h2>
+            <p className="mt-1 text-sm text-[var(--text-secondary)]">Jump to your workflow in a single click.</p>
+          </div>
 
-        <div id="categories" className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {categories.filter((category) => category.key !== 'all').map((category) => {
-            const count = allTools.filter((tool) => tool.category === category.key).length;
-            return (
-              <Link
-                key={category.key}
-                href={`/tools?category=${category.key.replace(' Tools', '').toLowerCase()}`}
-                className="gradient-border hover-lift block rounded-2xl p-[1px]"
-              >
-                <article className="glass-card rounded-2xl p-6">
-                  <p className="text-3xl">{category.icon}</p>
-                  <h3 className="mt-4 text-xl font-semibold text-[var(--text-primary)]">{category.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--text-secondary)]">{category.description}</p>
-                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">{count} Tools</p>
-                </article>
-              </Link>
-            );
-          })}
-        </div>
+          <div id="categories" className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {categories.filter((category) => category.key !== 'all').map((category) => {
+              const count = allTools.filter((tool) => tool.category === category.key).length;
+              return (
+                <Link
+                  key={category.key}
+                  href={`/tools?category=${category.key.replace(' Tools', '').toLowerCase()}`}
+                  className="gradient-border hover-lift block rounded-2xl p-[1px]"
+                >
+                  <article className="glass-card rounded-2xl p-6">
+                    <p className="text-3xl">{category.icon}</p>
+                    <h3 className="mt-4 text-xl font-semibold text-[var(--text-primary)]">{category.title}</h3>
+                    <p className="mt-2 text-sm text-[var(--text-secondary)]">{category.description}</p>
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">{count} Tools</p>
+                  </article>
+                </Link>
+              );
+            })}
+          </div>
+        </LazyRenderSection>
       </AnimatedSection>
 
       {/* FAQ Section for SEO */}
       <AnimatedSection delay={0.15} className="content-visibility-auto mx-auto mt-20 w-full max-w-4xl">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Frequently Asked Questions</h2>
-          <p className="mt-2 text-sm text-[var(--text-secondary)]">Everything you need to know about ToolForFree</p>
-        </div>
+        <LazyRenderSection fallbackClassName="surface-card skeleton-block h-80 rounded-2xl">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-semibold text-[var(--text-primary)]">Frequently Asked Questions</h2>
+            <p className="mt-2 text-sm text-[var(--text-secondary)]">Everything you need to know about ToolForFree</p>
+          </div>
 
-        <div className="grid gap-4">
-          {[
-            {
-              q: 'Are all tools completely free to use?',
-              a: 'Yes! All tools on ToolForFree are 100% free with no hidden charges, signup requirements, or usage limits. We believe in providing accessible tools for everyone.',
-            },
-            {
-              q: 'Do I need to create an account to use the tools?',
-              a: 'No account needed! All tools work instantly in your browser without any registration or login. Just visit the tool page and start using it right away.',
-            },
-            {
-              q: 'Is my data secure and private?',
-              a: 'Absolutely! All processing happens directly in your browser. Files never leave your device, and we do not store, transmit, or have access to your data. Your privacy is our top priority.',
-            },
-            {
-              q: 'What types of tools are available?',
-              a: 'We offer PDF tools (merge, split, compress), image tools (compress, resize, convert), text tools (word counter, case converter), and developer tools (JSON formatter, Base64 encoder, hash generator).',
-            },
-            {
-              q: 'Can I use these tools on mobile devices?',
-              a: 'Yes! All tools are fully responsive and work seamlessly on desktop, tablet, and mobile devices. Access them from any device with a modern web browser.',
-            },
-            {
-              q: 'Are there any file size limitations?',
-              a: 'Most tools can handle files up to 100MB. Processing happens in your browser, so performance may vary based on your device capabilities and file size.',
-            },
-          ].map((faq, index) => (
-            <details
-              key={index}
-              className="glass-card group rounded-xl p-5 transition-all hover:border-[var(--brand-soft)]"
-            >
-              <summary className="cursor-pointer text-base font-semibold text-[var(--text-primary)] list-none flex items-center justify-between">
-                {faq.q}
-                <span className="text-[var(--text-muted)] transition-transform group-open:rotate-180">▼</span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">{faq.a}</p>
-            </details>
-          ))}
-        </div>
+          <div className="grid gap-4">
+            {[
+              {
+                q: 'Are all tools completely free to use?',
+                a: 'Yes! All tools on ToolForFree are 100% free with no hidden charges, signup requirements, or usage limits. We believe in providing accessible tools for everyone.',
+              },
+              {
+                q: 'Do I need to create an account to use the tools?',
+                a: 'No account needed! All tools work instantly in your browser without any registration or login. Just visit the tool page and start using it right away.',
+              },
+              {
+                q: 'Is my data secure and private?',
+                a: 'Absolutely! All processing happens directly in your browser. Files never leave your device, and we do not store, transmit, or have access to your data. Your privacy is our top priority.',
+              },
+              {
+                q: 'What types of tools are available?',
+                a: 'We offer PDF tools (merge, split, compress), image tools (compress, resize, convert), text tools (word counter, case converter), and developer tools (JSON formatter, Base64 encoder, hash generator).',
+              },
+              {
+                q: 'Can I use these tools on mobile devices?',
+                a: 'Yes! All tools are fully responsive and work seamlessly on desktop, tablet, and mobile devices. Access them from any device with a modern web browser.',
+              },
+              {
+                q: 'Are there any file size limitations?',
+                a: 'Most tools can handle files up to 100MB. Processing happens in your browser, so performance may vary based on your device capabilities and file size.',
+              },
+            ].map((faq, index) => (
+              <details
+                key={index}
+                className="glass-card group rounded-xl p-5 transition-all hover:border-[var(--brand-soft)]"
+              >
+                <summary className="cursor-pointer text-base font-semibold text-[var(--text-primary)] list-none flex items-center justify-between">
+                  {faq.q}
+                  <span className="text-[var(--text-muted)] transition-transform group-open:rotate-180">v</span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </LazyRenderSection>
       </AnimatedSection>
 
       {/* SEO Content Section */}
@@ -271,25 +321,25 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-[var(--text-primary)]">Why Choose ToolForFree?</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             <div>
-              <h3 className="text-lg font-semibold text-[var(--text-primary)]">🚀 Fast & Efficient</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">Fast and Efficient</h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
                 All tools process files instantly in your browser. No server uploads, no waiting times, no queues.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-[var(--text-primary)]">🔒 100% Private</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">100% Private</h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
                 Your files never leave your device. All processing happens locally in your browser for maximum privacy.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-[var(--text-primary)]">💰 Completely Free</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">Completely Free</h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
                 No subscriptions, no trials, no hidden fees. Every tool is free to use without limitations.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-[var(--text-primary)]">🎯 No Signup Required</h3>
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">No Signup Required</h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
                 Start using tools immediately. No registration, no email verification, no unnecessary steps.
               </p>
@@ -299,14 +349,14 @@ export default function Home() {
           <div className="mt-8">
             <h3 className="text-lg font-semibold text-[var(--text-primary)]">Popular Use Cases</h3>
             <ul className="mt-3 grid gap-2 text-sm text-[var(--text-secondary)] md:grid-cols-2">
-              <li>✓ Merge multiple PDF documents online</li>
-              <li>✓ Compress images without quality loss</li>
-              <li>✓ Format and validate JSON data</li>
-              <li>✓ Convert text case for content writing</li>
-              <li>✓ Generate secure passwords instantly</li>
-              <li>✓ Encode and decode Base64 strings</li>
-              <li>✓ Count words and characters for SEO</li>
-              <li>✓ Calculate age, EMI, and GST easily</li>
+              <li>Merge multiple PDF documents online</li>
+              <li>Compress images without quality loss</li>
+              <li>Format and validate JSON data</li>
+              <li>Convert text case for content writing</li>
+              <li>Generate secure passwords instantly</li>
+              <li>Encode and decode Base64 strings</li>
+              <li>Count words and characters for SEO</li>
+              <li>Calculate age, EMI, and GST easily</li>
             </ul>
           </div>
         </div>

@@ -186,6 +186,66 @@ a {
   animation: skeleton 1.4s linear infinite;
 }
 
+.route-loader-wrap {
+  min-height: calc(100vh - 120px);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.route-loader-card {
+  width: min(680px, 100%);
+  text-align: center;
+  padding: 2rem 1.25rem;
+}
+
+.route-loader-icon {
+  font-size: 1.6rem;
+  margin: 0;
+  animation: loader-float 2.4s ease-in-out infinite;
+}
+
+.route-loader-quote {
+  margin: 0.8rem auto 0;
+  max-width: 560px;
+  font-size: clamp(1.2rem, 2.1vw, 2rem);
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.route-loader-author {
+  margin-top: 0.45rem;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+}
+
+.route-loader-spinner {
+  width: 46px;
+  height: 46px;
+  margin: 1.2rem auto 0;
+  border-radius: 9999px;
+  border: 4px solid color-mix(in oklab, var(--border-soft) 86%, transparent);
+  border-top-color: #4da7d8;
+  animation: loader-spin 0.95s linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 .ripple {
   position: relative;
   overflow: hidden;

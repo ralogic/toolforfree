@@ -1,11 +1,21 @@
 import { TOOLS_CATALOG } from '@/lib/tools-catalog';
 import { notFound } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import ToolHero from '@/components/ToolHero';
-import FAQSection from '@/components/FAQSection';
-import RelatedTools from '@/components/RelatedTools';
-import FavoriteButton from '@/components/FavoriteButton';
 import { ToolAnalyticsWrapper } from '@/hooks/useToolAnalytics';
+
+const FAQSection = dynamic(() => import('@/components/FAQSection'), {
+  loading: () => <div className="surface-card h-64 rounded-2xl" aria-hidden="true" />,
+});
+
+const RelatedTools = dynamic(() => import('@/components/RelatedTools'), {
+  loading: () => <div className="surface-card h-72 rounded-2xl" aria-hidden="true" />,
+});
+
+const FavoriteButton = dynamic(() => import('@/components/FavoriteButton'), {
+  loading: () => <div className="h-10 w-10 rounded-xl border border-slate-200 bg-white" aria-hidden="true" />,
+});
 
 // This would be dynamically imported/loaded based on the tool
 export default async function ToolPageTemplate({ params }: { params: Promise<{ slug: string }> }) {
