@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Script from 'next/script';
 import Navbar from '@/components/Navbar';
@@ -18,10 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://toolforfree.in'),
-  title: {
-    default: 'ToolForFree - Free Online PDF, Image & Developer Tools',
-    template: '%s - ToolForFree',
-  },
+  title: 'ToolForFree - Free Online PDF, Image & Developer Tools',
   description: 'Free online tools for PDF, images, text and developers. Merge PDFs, compress images, format JSON, and more. Fast, secure, no signup required.',
   keywords: [
     'free online tools',
@@ -87,6 +84,11 @@ export const metadata: Metadata = {
     canonical: 'https://toolforfree.in',
   },
   category: 'technology',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

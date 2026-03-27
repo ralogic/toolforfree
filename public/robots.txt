@@ -4,13 +4,11 @@
 User-agent: *
 Allow: /
 Allow: /tools/
-Allow: /r/
 
 # Disallow internal directories
 Disallow: /api/
 Disallow: /includes/
 Disallow: /uploads/
-Disallow: /_next/
 Disallow: /admin/
 
 # Crawl delay (optional, helps with server load)
@@ -23,9 +21,7 @@ Sitemap: https://toolforfree.in/sitemap.xml
 User-agent: Googlebot
 Allow: /
 Allow: /tools/
-Allow: /r/
 
 User-agent: Bingbot
 Allow: /
 Allow: /tools/
-Allow: /r/

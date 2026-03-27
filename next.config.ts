@@ -29,6 +29,28 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/assets/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
+          },
         ],
       },
     ];
@@ -36,10 +58,15 @@ const nextConfig: NextConfig = {
   
   async redirects() {
     return [
-      // Redirect old /r/ routes to /tools/
+      // Redirect old /r routes to /tools canonical paths.
       {
-        source: '/r/:slug',
-        destination: '/tools/:slug',
+        source: '/r',
+        destination: '/tools',
+        permanent: true,
+      },
+      {
+        source: '/r/:slug*',
+        destination: '/tools/:slug*',
         permanent: true,
       },
     ];

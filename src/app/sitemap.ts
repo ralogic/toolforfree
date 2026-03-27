@@ -52,22 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // Short routes (/r/slug) - redirects to /tools/slug
-  const shortRoutes = TOOLS_CATALOG.allTools.map((tool) => ({
-    url: `${baseUrl}/r/${tool.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  // Category pages
-  const categories = ['pdf', 'image', 'developer', 'text', 'utility', 'seo'];
-  const categoryRoutes = categories.map((category) => ({
-    url: `${baseUrl}/tools?category=${category}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  return [...routes, ...toolRoutes, ...shortRoutes, ...categoryRoutes];
+  // Keep sitemap focused on canonical, indexable URLs.
+  return [...routes, ...toolRoutes];
 }

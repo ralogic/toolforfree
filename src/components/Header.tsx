@@ -27,7 +27,7 @@ export default function Header() {
        });
         </script>
         <div className="nav-links flex items-center gap-4">
-          <Link href="/r" className="text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">
+          <Link href="/tools" className="text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">
             Tools
           </Link>
           <ThemeToggle />

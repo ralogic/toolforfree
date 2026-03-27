@@ -13,19 +13,45 @@ export interface SEOConfig {
   noindex?: boolean;
 }
 
+function normalizeTitle(title: string): string {
+  const compact = title.replace(/\s+/g, ' ').trim();
+  if (compact.length <= 60) {
+    return compact;
+  }
+  return `${compact.slice(0, 57).trimEnd()}...`;
+}
+
+function normalizeDescription(description: string): string {
+  const compact = description.replace(/\s+/g, ' ').trim();
+  if (compact.length >= 150 && compact.length <= 160) {
+    return compact;
+  }
+
+  const suffix = ' Fast, secure, mobile-friendly, and privacy-first with no signup required.';
+  const expanded = `${compact}${suffix}`.replace(/\s+/g, ' ').trim();
+
+  if (expanded.length <= 160) {
+    return expanded;
+  }
+
+  return `${expanded.slice(0, 157).trimEnd()}...`;
+}
+
 /**
  * Generate complete metadata for any page
  */
 export const generateMetadata = (config: SEOConfig): Metadata => {
-  const fullTitle = config.title.includes(SITE_NAME) ? config.title : `${config.title} - ${SITE_NAME}`;
+  const baseTitle = config.title.includes(SITE_NAME) ? config.title : `${config.title} - ${SITE_NAME}`;
+  const fullTitle = normalizeTitle(baseTitle);
+  const description = normalizeDescription(config.description);
   
   return {
     title: fullTitle,
-    description: config.description,
+    description,
     keywords: config.keywords?.join(', '),
     openGraph: {
-      title: config.title,
-      description: config.description,
+      title: fullTitle,
+      description,
       type: 'website',
       images: config.ogImage ? [{ url: config.ogImage }] : [{ url: DEFAULT_OG_IMAGE }],
       url: config.canonical || SITE_URL,
@@ -33,8 +59,8 @@ export const generateMetadata = (config: SEOConfig): Metadata => {
     },
     twitter: {
       card: 'summary_large_image',
-      title: config.title,
-      description: config.description,
+      title: fullTitle,
+      description,
       images: config.ogImage ? [config.ogImage] : [DEFAULT_OG_IMAGE],
     },
     alternates: config.canonical ? { canonical: config.canonical } : undefined,
@@ -138,6 +164,28 @@ export const generateWebSiteSchema = () => {
         urlTemplate: `${SITE_URL}/tools?search={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
+    },
+  };
+};
+
+/**
+ * Generate WebPage schema for static content pages
+ */
+export const generateWebPageSchema = (config: {
+  name: string;
+  description: string;
+  url: string;
+}) => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: config.name,
+    description: config.description,
+    url: config.url,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   };
 };
