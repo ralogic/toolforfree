@@ -18,6 +18,11 @@ const ToastContainer = dynamic(
 
 type IdleCallbackHandle = number;
 
+type IdleCapableRuntime = typeof globalThis & {
+  requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => IdleCallbackHandle;
+  cancelIdleCallback?: (handle: IdleCallbackHandle) => void;
+};
+
 type NavigatorWithConnection = Navigator & {
   connection?: {
     saveData?: boolean;
@@ -29,21 +34,23 @@ export default function DeferredGlobalUI() {
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
+    const runtime = globalThis as IdleCapableRuntime;
+
     const scheduleIdleTask = (callback: () => void): IdleCallbackHandle => {
-      if ('requestIdleCallback' in window) {
-        return window.requestIdleCallback(callback, { timeout: 1200 });
+      if (typeof runtime.requestIdleCallback === 'function') {
+        return runtime.requestIdleCallback(callback, { timeout: 1200 });
       }
 
-      return window.setTimeout(callback, 300);
+      return runtime.setTimeout(callback, 300);
     };
 
     const cancelIdleTask = (handle: IdleCallbackHandle) => {
-      if ('cancelIdleCallback' in window) {
-        window.cancelIdleCallback(handle);
+      if (typeof runtime.cancelIdleCallback === 'function') {
+        runtime.cancelIdleCallback(handle);
         return;
       }
 
-      window.clearTimeout(handle);
+      runtime.clearTimeout(handle);
     };
 
     const navigatorWithConnection = navigator as NavigatorWithConnection;
