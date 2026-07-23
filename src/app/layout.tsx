@@ -6,6 +6,9 @@ import Footer from '@/components/Footer';
 import DeferredGlobalUI from '@/components/DeferredGlobalUI';
 import './globals.css';
 
+const oneSignalAppId = 'ef0bd327-e01f-44ef-a0e1-0b80f77d28c4';
+const oneSignalSafariWebId = 'web.onesignal.auto.10bba952-d3e6-4be7-b269-bd5caae877a4';
+
 const geistSans = Geist({
   subsets: ['latin'],
   variable: '--font-geist-sans',
@@ -110,6 +113,37 @@ export default function RootLayout({
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
+
+        <Script
+          id="onesignal-deferred-queue"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: 'window.OneSignalDeferred = window.OneSignalDeferred || [];',
+          }}
+        />
+        <Script
+          src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          id="onesignal-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.OneSignalDeferred.push(async function(OneSignal) {
+                await OneSignal.init({
+                  appId: '${oneSignalAppId}',
+                  safari_web_id: '${oneSignalSafariWebId}',
+                  serviceWorkerPath: 'push/onesignal/OneSignalSDKWorker.js',
+                  serviceWorkerParam: { scope: '/push/onesignal/' },
+                  notifyButton: {
+                    enable: true,
+                  },
+                });
+              });
+            `,
+          }}
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} bg-[var(--bg-page)] text-[var(--text-primary)] antialiased relative`}>
         {/* Schema.org Website markup */}
